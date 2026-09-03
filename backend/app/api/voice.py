@@ -150,8 +150,8 @@ async def process_voice_interaction(
         "transaction_count": len(transactions)
     }
 
-    # Step 4: Analyze with Ollama Cloud LLM (Minimax-M3) using Tamil query & financial context
-    analysis = await ollama_service.analyze_financial_data(
+    # Step 4: Analyze with Sarvam 105B LLM (sarvam-105b-conversations) using Tamil query & financial context
+    analysis = await sarvam_service.generate_financial_advice(
         user_data=user_financial_profile,
         query_tamil=tamil_translation,
         preferred_language=preferred_language

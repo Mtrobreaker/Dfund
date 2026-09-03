@@ -72,26 +72,28 @@ async def test_voice_interaction_intent_tamil():
 async def test_batch_transaction_sync():
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
+        import time
+        dev_id = f"sync_device_{int(time.time()*1000)}"
         payload = [
             {
-                "device_id": "sync_device_1",
+                "device_id": dev_id,
                 "bank_name": "HDFC",
                 "amount": 1200.0,
                 "type": "DEBIT",
                 "category": "FOOD",
                 "vpa": "swiggy@hdfc",
-                "raw_message": "Rs. 1200.00 debited from HDFC for Swiggy",
+                "raw_message": f"Rs. 1200.00 debited from HDFC for Swiggy #{dev_id}",
                 "is_recurring": False,
                 "is_emi": False
             },
             {
-                "device_id": "sync_device_1",
+                "device_id": dev_id,
                 "bank_name": "SBI",
                 "amount": 3500.0,
                 "type": "DEBIT",
                 "category": "EMI",
                 "vpa": "sbi.loan@upi",
-                "raw_message": "Rs. 3500.00 debited for Loan EMI",
+                "raw_message": f"Rs. 3500.00 debited for Loan EMI #{dev_id}",
                 "is_recurring": True,
                 "is_emi": True
             }

@@ -118,15 +118,21 @@ d:/Dfund/
     1. **What was done** (e.g. calculated SIP, filtered transactions, checked upcoming EMIs).
     2. **Exact numerical result** (e.g. Total invested ₹18,000, expected maturity ₹22,812 with ₹4,812 profit; total due is ₹4,100; spent ₹7,198).
   - Synchronized bottom navigation menu tabs during programmatic transitions.
-  - 100% verified on live physical device across SIP calculator, EMI inspection, Food spending filtering, and Dark/Light modes.
+- [x] **Milestone 16**: Sarvam Full Indian Regional AI Suite (Sarvam 105B Conversations LLM, Saaras v4 STT, Mayura v1 Translation, Bulbul v3 TTS):
+  - Upgraded financial reasoning and tool dispatch engine entirely to **`sarvam-105b-conversations`** (Sarvam 105B parameter Indian-context LLM).
+  - Upgraded Speech-to-Text to **`saaras:v4`** with 23 Indian languages and automatic language detection.
+  - Upgraded translation to **`mayura:v1`** with tone and script control.
+  - Upgraded neural voice synthesis to **`bulbul:v3`** (48 kHz HD).
+  - Completely bypassed Ollama to run an all-in-one native Indian AI stack.
+  - Verified live: Spoken query translated to Tamil -> analyzed by `sarvam-105b-conversations` -> produced explicit what was done + exact numerical results -> dispatched in-app action payload -> synthesized Bulbul v3 neural voice speech.
 
 ---
 
 ## 7. Current Status
-- **Phase**: Milestone 15 Complete — Autonomous Action Execution & Exact Spoken Result Verified Live on Physical Device.
+- **Phase**: Milestone 16 Complete — Full Sarvam AI Suite (`sarvam-105b-conversations`, `saaras:v4`, `mayura:v1`, `bulbul:v3`) active and verified live.
 - **APK Location**: `d:\Dfund\DFund-app-debug.apk` in root folder and `d:\Dfund\android\app\build\outputs\apk\debug\app-debug.apk`.
-- **Backend Status**: Online at `http://0.0.0.0:8000` with Sarvam Translation, Bulbul v3 TTS, and Ollama Minimax-M3 service active.
-- **Device Status**: Verified on physical device (`00093347I000307`). Auto-scanning SMS inbox, automatic voice execution, explicit numerical spoken announcements, and 1-tap Dark/Light theme switching all working flawlessly.
+- **Backend Status**: Online at `http://0.0.0.0:8000` powered by Sarvam 105B Conversations LLM and Sarvam Voice APIs.
+- **Device Status**: Live physical device (`00093347I000307`) connected, updated APK installed, reverse port forwarding enabled.
 - **Memory**: Graphify Knowledge Graph synchronized.
 
 

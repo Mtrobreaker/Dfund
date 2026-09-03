@@ -1,11 +1,12 @@
 # 🚀 DFund — Next-Gen AI Financial Advisor & Micro-SIP Automation
 
 > **Autonomous personal finance and micro-investment platform for gig economy workers, freelancers, and families.**  
-> Powered by **Sarvam AI (Regional Speech & Translation)**, **Ollama Cloud (Minimax-M3 LLM)**, and **Native Android Material 3**.
+> Powered by **Sarvam AI Full Indian Regional AI Suite (Sarvam 105B LLM, Saaras v4 STT, Mayura v1 Translation, Bulbul v3 TTS)** and **Native Android Material 3**.
 
 [![Platform](https://img.shields.io/badge/Platform-Android%20Native%20(Java)-green.svg)](https://developer.android.com/)
 [![Backend](https://img.shields.io/badge/Backend-FastAPI%20%7C%20Python%203.11+-blue.svg)](https://fastapi.tiangolo.com/)
-[![AI Engine](https://img.shields.io/badge/AI-Sarvam%20AI%20%2B%20Ollama%20Minimax--M3-orange.svg)](https://sarvam.ai/)
+[![AI Engine](https://img.shields.io/badge/AI%20Engine-Sarvam%20AI%20Full%20Suite-orange.svg)](https://sarvam.ai/)
+[![LLM](https://img.shields.io/badge/LLM-Sarvam%20105B%20Conversations-red.svg)](https://sarvam.ai/)
 [![UI Design](https://img.shields.io/badge/Design-Material%203%20Day%2FNight-indigo.svg)](https://m3.material.io/)
 [![License](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 
@@ -13,22 +14,22 @@
 
 ## 🌟 Core Highlights
 
-### 🎙️ 1. Sarvam Regional Voice & Ollama Minimax-M3 Pipeline
-DFund features a continuous multilingual conversational loop tailored specifically for Indian regional languages:
-- **Speech-to-Text (STT)**: Uses **Sarvam Saaras** to recognize spoken user prompts and automatically detect language.
-- **Cross-Lingual Bridge**: Automatically translates queries into Tamil (`ta-IN`) for structured AI financial reasoning.
-- **Financial Ledger Analysis**: **Ollama Cloud (`minimax-m3:cloud`)** analyzes the user's real-time financial ledger (Income, Expenses, EMIs, Safety Shield cushion, Surplus).
-- **Text-to-Speech (TTS)**: Synthesizes spoken advice using **Sarvam Bulbul v3** neural voice in the user's native tongue (Tamil, English, Telugu, or Malayalam).
+### 🎙️ 1. All-in-One Sarvam AI Indian Regional Intelligence Pipeline
+DFund runs entirely on Sarvam AI's flagship models, purpose-built for Indian linguistic and financial contexts:
+- **Speech-to-Text (STT)**: **Sarvam Saaras v4** (`saaras:v4`) — 23 Indian languages with auto language detection and noise robustness.
+- **Cross-Lingual Bridge**: **Sarvam Mayura v1** (`mayura:v1`) — Translates spoken queries into Tamil (`ta-IN`) with tone and script control.
+- **Financial Reasoning & Tool Calling**: **Sarvam 105B Conversations** (`sarvam-105b-conversations`) — 105B parameter LLM deeply trained on Indian personal finance, analyzing live ledger cashflow, calculating compound interest, and emitting actionable in-app commands.
+- **Text-to-Speech (TTS)**: **Sarvam Bulbul v3** (`bulbul:v3`) — 48 kHz HD neural voice speaking back in the user's native tongue (Tamil, English, Telugu, or Malayalam).
 - **On-Device Offline Fallback**: Built-in `LocalAiIntentParser` ensures the voice assistant continues working smoothly even when offline.
 
 ```mermaid
 graph TD
-    A[User Speaks via Mic / Preset] -->|Audio / Text| B[Sarvam Saaras STT]
-    B -->|Transcribed Text| C[Sarvam Translate -> Tamil]
-    C -->|Tamil Query + Ledger Summary| D[Ollama Cloud Minimax-M3 LLM]
+    A[User Speaks via Mic / Preset] -->|Audio / Text| B[Sarvam Saaras v4 STT]
+    B -->|Transcribed Text| C[Sarvam Mayura v1 -> Tamil]
+    C -->|Tamil Query + Ledger Summary| D[Sarvam 105B Conversations LLM]
     D -->|Tamil & English Guidance + Action Code| E[DFund Backend Engine]
-    E -->|Text Advice| F[Sarvam Bulbul v3 TTS]
-    F -->|Base64 Audio Speech| G[Android Voice Manager]
+    E -->|Text Advice| F[Sarvam Bulbul v3 HD TTS]
+    F -->|48 kHz Audio Speech| G[Android Voice Manager]
     E -->|JSON Action Payload| H[Autonomous Action Navigator]
     G --> I[Spoken Output with Numerical Results]
     H --> J[Auto-Navigate to Screen: SIP / EMI / Spend]

@@ -1,4 +1,5 @@
 import re
+import json
 import logging
 import httpx
 from typing import Dict, Any, Optional, Tuple
@@ -11,29 +12,35 @@ class SarvamService:
     def __init__(self):
         self.api_key = settings.SARVAM_API_KEY
         self.base_url = settings.SARVAM_BASE_URL.rstrip("/")
+        self.llm_model = settings.SARVAM_LLM_MODEL
+        self.stt_model = settings.SARVAM_STT_MODEL
+        self.translate_model = settings.SARVAM_TRANSLATE_MODEL
+        self.tts_model = settings.SARVAM_TTS_MODEL
 
     async def transcribe_audio(self, audio_bytes: bytes, filename: str = "audio.wav") -> Tuple[str, str]:
         """
-        Transcribes audio using Sarvam Saaras STT API if key is available.
+        Transcribes audio using Sarvam Saaras v4 STT API.
         Returns (transcript, detected_language_code).
         """
         if self.api_key and self.api_key != "mock_key":
             try:
                 async with httpx.AsyncClient(timeout=15.0) as client:
                     files = {"file": (filename, audio_bytes, "audio/wav")}
+                    data = {"model": self.stt_model}
                     headers = {"api-subscription-key": self.api_key}
                     response = await client.post(
                         f"{self.base_url}/speech-to-text",
                         files=files,
+                        data=data,
                         headers=headers
                     )
                     if response.status_code == 200:
-                        data = response.json()
-                        transcript = data.get("transcript", "")
-                        language = data.get("language_code", "en-IN")
+                        res_data = response.json()
+                        transcript = res_data.get("transcript", "")
+                        language = res_data.get("language_code", "en-IN")
                         return transcript, language
             except Exception as e:
-                logger.error(f"Sarvam STT API error: {e}. Falling back to default transcript.")
+                logger.error(f"Sarvam Saaras STT API error: {e}. Falling back to default transcript.")
 
         return "Show my spending on food this month", "en-IN"
 
@@ -44,7 +51,7 @@ class SarvamService:
         target_language_code: str = "ta-IN"
     ) -> str:
         """
-        Translates text using Sarvam Translation API (sarvam-translate:v1).
+        Translates text using Sarvam Mayura v1 Translation API.
         """
         if not text or not text.strip():
             return ""
@@ -58,7 +65,7 @@ class SarvamService:
                     "input": text,
                     "source_language_code": source_language_code,
                     "target_language_code": target_language_code,
-                    "model": "sarvam-translate:v1"
+                    "model": self.translate_model
                 }
                 headers = {
                     "Content-Type": "application/json",
@@ -76,17 +83,15 @@ class SarvamService:
                         if translated:
                             return translated
             except Exception as e:
-                logger.error(f"Sarvam Translation API error: {e}")
+                logger.error(f"Sarvam Mayura Translation API error: {e}")
 
         # Fallback if offline or API unreachable
         return text
 
     async def translate_to_tamil(self, text: str, source_language_code: str = "auto") -> str:
         """
-        Translates user prompt into Tamil.
-        If already in Tamil (checked via Tamil Unicode range 0x0B80-0x0BFF), returns as is.
+        Translates user prompt into Tamil using Mayura v1.
         """
-        # Quick check if text is already primarily Tamil
         tamil_chars = sum(1 for c in text if 0x0B80 <= ord(c) <= 0x0BFF)
         if tamil_chars > 3 and tamil_chars > len(text) * 0.3:
             return text
@@ -105,7 +110,7 @@ class SarvamService:
 
     async def translate_from_tamil(self, tamil_text: str, target_lang: str) -> str:
         """
-        Translates Tamil financial suggestions into the user's preferred language (en, te, ml, etc.)
+        Translates Tamil advice into user's preferred language using Mayura v1.
         """
         if target_lang in ["ta", "ta-IN"]:
             return tamil_text
@@ -127,13 +132,11 @@ class SarvamService:
         speaker: Optional[str] = None
     ) -> Optional[str]:
         """
-        Synthesizes speech into base64 audio using Sarvam Bulbul v3 TTS API.
-        Valid speakers include: kavitha, priya, aditya, rahul, shreya, amit.
+        Synthesizes speech into base64 audio using Sarvam Bulbul v3 HD TTS API.
         """
         if not text or not self.api_key or self.api_key == "mock_key":
             return None
 
-        # Choose appropriate speaker based on language
         chosen_speaker = speaker or "kavitha"
         if "en" in target_language_code:
             chosen_speaker = speaker or "priya"
@@ -147,7 +150,7 @@ class SarvamService:
             lang_code = f"{lang_code}-IN"
 
         payload = {
-            "inputs": [text[:500]],  # Bulbul supports up to 2500 chars, limit to 500 for fast UI response
+            "inputs": [text[:500]],
             "target_language_code": lang_code,
             "speaker": chosen_speaker,
             "pitch": 0,
@@ -155,7 +158,7 @@ class SarvamService:
             "loudness": 1.5,
             "speech_sample_rate": 22050,
             "enable_preprocessing": True,
-            "model": "bulbul:v3"
+            "model": self.tts_model
         }
 
         headers = {
@@ -176,10 +179,206 @@ class SarvamService:
                     if audios:
                         return audios[0]
                 else:
-                    logger.warning(f"Sarvam TTS API status {response.status_code}: {response.text}")
+                    logger.warning(f"Sarvam Bulbul TTS API status {response.status_code}: {response.text}")
         except Exception as e:
             logger.error(f"Sarvam TTS API error: {e}")
 
         return None
+
+    async def generate_financial_advice(
+        self,
+        user_data: Dict[str, Any],
+        query_tamil: str,
+        preferred_language: str = "en"
+    ) -> Dict[str, Any]:
+        """
+        Analyzes user finances and query using Sarvam 105B LLM (sarvam-105b-conversations / sarvam-105b).
+        Emits actionable recommendations, exact mathematical figures, and in-app navigation action codes.
+        """
+        if self.api_key and self.api_key != "mock_key":
+            try:
+                result = await self._call_sarvam_105b_api(user_data, query_tamil)
+                if result:
+                    return result
+            except Exception as e:
+                logger.error(f"Sarvam 105B LLM API error: {e}. Utilizing intelligent local financial engine.")
+
+        return self._fallback_financial_analysis(user_data, query_tamil, preferred_language)
+
+    async def _call_sarvam_105b_api(self, user_data: Dict[str, Any], query_tamil: str) -> Optional[Dict[str, Any]]:
+        headers = {
+            "Content-Type": "application/json",
+            "api-subscription-key": self.api_key
+        }
+
+        system_prompt = (
+            "You are DFund's elite AI personal finance advisor for gig workers and families. "
+            "You receive the user's financial ledger (Income, Expenses, EMIs, Safety Shield buffer, Surplus) "
+            "and the user's query in Tamil.\n"
+            "MANDATORY REQUIREMENT: In your response, you MUST explicitly state:\n"
+            "1. WHAT WAS DONE (e.g. Calculated SIP, Opened food expenses, Checked upcoming EMIs).\n"
+            "2. THE EXACT NUMERICAL RESULT (e.g. Total invested ₹18,000, expected maturity ₹22,812 with ₹4,812 profit; or Total due is ₹4,100; or Spent ₹7,198).\n"
+            "Respond ONLY in valid JSON matching this exact schema:\n"
+            "{\n"
+            '  "tamil_suggestion": "<Tamil: explicit statement of what was done and exact result, max 2 sentences>",\n'
+            '  "english_suggestion": "<English: explicit statement of what was done and exact result, max 2 sentences>",\n'
+            '  "action_type": "<ACTION_OPEN_SIP_CALCULATOR or ACTION_CHECK_EMIS or ACTION_ALLOCATE_SURPLUS or ACTION_SHOW_SPENDING or ACTION_CHANGE_LANGUAGE or ACTION_FINANCIAL_ADVICE>",\n'
+            '  "parameters": {"amount": 500.0, "category": "FOOD", "tenure_years": 3},\n'
+            '  "action_target_screen": "<SCREEN_DASHBOARD or SCREEN_SIP or SCREEN_TRANSACTIONS>"\n'
+            "}"
+        )
+
+        user_content = (
+            f"User Financial Summary:\n{json.dumps(user_data, ensure_ascii=False, indent=2)}\n\n"
+            f"User Query (Tamil):\n{query_tamil}"
+        )
+
+        payload = {
+            "model": self.llm_model,
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_content}
+            ],
+            "temperature": 0.2
+        }
+
+        async with httpx.AsyncClient(timeout=25.0) as client:
+            endpoint = f"{self.base_url}/v1/chat/completions"
+            response = await client.post(endpoint, json=payload, headers=headers)
+
+            if response.status_code == 200:
+                data = response.json()
+                content = ""
+                if "choices" in data and len(data["choices"]) > 0:
+                    choice = data["choices"][0]
+                    if "message" in choice and "content" in choice["message"]:
+                        content = choice["message"]["content"]
+
+                if content:
+                    cleaned = content.strip()
+                    if "```json" in cleaned:
+                        cleaned = cleaned.split("```json")[-1].split("```")[0].strip()
+                    elif "```" in cleaned:
+                        cleaned = cleaned.split("```")[-1].split("```")[0].strip()
+
+                    parsed = json.loads(cleaned)
+                    return {
+                        "tamil_suggestion": parsed.get("tamil_suggestion", ""),
+                        "english_suggestion": parsed.get("english_suggestion", ""),
+                        "action_type": parsed.get("action_type", "ACTION_FINANCIAL_ADVICE"),
+                        "parameters": parsed.get("parameters", {}),
+                        "action_target_screen": parsed.get("action_target_screen", "SCREEN_DASHBOARD")
+                    }
+            else:
+                logger.warning(f"Sarvam 105B API returned HTTP {response.status_code}: {response.text}")
+
+        return None
+
+    def _fallback_financial_analysis(self, user_data: Dict[str, Any], query_tamil: str, preferred_language: str) -> Dict[str, Any]:
+        """
+        Intelligent financial calculation engine when network or API limits occur.
+        Computes accurate compound interest, EMI dues, and category spending with explicit announcements.
+        """
+        surplus = float(user_data.get("available_surplus", 5000.0))
+        emi = float(user_data.get("total_emi", 3500.0))
+        spending = float(user_data.get("total_spending", 16500.0))
+        category_spending = user_data.get("category_spending", {})
+        q_lower = query_tamil.lower()
+
+        # 1. SIP Calculation Intent
+        if any(w in q_lower for w in ["sip", "முதலீடு", "சேமிப்பு", "வட்டி", "invest", "சேமி"]):
+            amount = 500.0
+            years = 3
+            amt_match = re.search(r'(?:₹|ரூபாய்|rs\.?|inr)?\s*(\d{3,6})', q_lower)
+            if amt_match:
+                try:
+                    amount = float(amt_match.group(1))
+                except ValueError:
+                    pass
+
+            yr_match = re.search(r'(\d{1,2})\s*(?:ஆண்டு|வருட|year)', q_lower)
+            if yr_match:
+                try:
+                    years = int(yr_match.group(1))
+                except ValueError:
+                    pass
+
+            r = 0.12 / 12.0
+            n = years * 12
+            fv = amount * (((1 + r) ** n - 1) / r) * (1 + r)
+            total_invested = amount * n
+            returns = fv - total_invested
+
+            fv_str = f"{round(fv):,}"
+            inv_str = f"{round(total_invested):,}"
+            ret_str = f"{round(returns):,}"
+            amt_str = f"{round(amount):,}"
+
+            return {
+                "tamil_suggestion": f"மாதம் ₹{amt_str} வீதம் {years} ஆண்டுகளுக்கு SIP கணக்கிடப்பட்டது. மொத்த முதலீடு ₹{inv_str}, எதிர்பார்க்கப்படும் முதிர்வுத் தொகை ₹{fv_str} (லாபம் ₹{ret_str}).",
+                "english_suggestion": f"Calculated SIP for ₹{amt_str}/month for {years} years. Total invested is ₹{inv_str}, expected maturity is ₹{fv_str} with ₹{ret_str} gains.",
+                "action_type": "ACTION_OPEN_SIP_CALCULATOR",
+                "parameters": {
+                    "monthly_amount": amount,
+                    "amount": amount,
+                    "tenure_years": years,
+                    "expected_return": 12.0
+                },
+                "action_target_screen": "SCREEN_SIP"
+            }
+
+        # 2. EMI / Loans Intent
+        elif any(w in q_lower for w in ["emi", "கடன்", "தவணை", "லோன்", "loan", "due"]):
+            emi_str = f"{round(emi):,}"
+            return {
+                "tamil_suggestion": f"உங்கள் நிலுவையில் உள்ள EMI சரிபார்க்கப்பட்டது. வரவிருக்கும் மொத்த தவணைத் தொகை ₹{emi_str} ஆகும்.",
+                "english_suggestion": f"Checked your upcoming EMIs. Your total due installment is ₹{emi_str}.",
+                "action_type": "ACTION_CHECK_EMIS",
+                "parameters": {"filter": "EMI"},
+                "action_target_screen": "SCREEN_TRANSACTIONS"
+            }
+
+        # 3. Category Spending Intent
+        elif any(w in q_lower for w in ["செலவு", "பணம்", "சாப்பாடு", "உணவு", "spend", "expense", "food"]):
+            cat = "OTHER"
+            cat_label_ta = "இதர"
+            cat_label_en = "miscellaneous"
+
+            if any(w in q_lower for w in ["சாப்பாடு", "உணவு", "ஹோட்டல்", "food", "restaurant"]):
+                cat = "FOOD"
+                cat_label_ta = "உணவு"
+                cat_label_en = "food"
+            elif any(w in q_lower for w in ["மளிகை", "grocery"]):
+                cat = "GROCERY"
+                cat_label_ta = "மளிகை"
+                cat_label_en = "grocery"
+            elif any(w in q_lower for w in ["பெட்ரோல்", "பயணம்", "fuel", "travel"]):
+                cat = "TRAVEL"
+                cat_label_ta = "பயணம்"
+                cat_label_en = "travel"
+
+            cat_spend = category_spending.get(cat, 0.0)
+            if cat_spend == 0.0:
+                cat_spend = spending
+
+            spend_str = f"{round(cat_spend):,}"
+            return {
+                "tamil_suggestion": f"உங்கள் {cat_label_ta} செலவுகள் திறக்கப்பட்டது. இந்த மாத மொத்த செலவு ₹{spend_str} ஆகும்.",
+                "english_suggestion": f"Opened your {cat_label_en} expenses. Your total spent this month is ₹{spend_str}.",
+                "action_type": "ACTION_SHOW_SPENDING",
+                "parameters": {"category": cat},
+                "action_target_screen": "SCREEN_TRANSACTIONS"
+            }
+
+        # 4. General Financial Advice
+        else:
+            surplus_str = f"{round(surplus):,}"
+            return {
+                "tamil_suggestion": f"உங்கள் நிதி நிலைமை பகுப்பாய்வு செய்யப்பட்டது. உங்களிடம் ₹{surplus_str} உபரி தொகை உள்ளது. இதில் பாதியை அவசர கால நிதிக்கும், மீதியை SIP முதலீட்டிற்கும் ஒதுக்கலாம்.",
+                "english_suggestion": f"Analyzed your finances. You have ₹{surplus_str} available surplus. Recommend allocating 50% to Safety Shield and 50% to Micro-SIP.",
+                "action_type": "ACTION_FINANCIAL_ADVICE",
+                "parameters": {"surplus": surplus},
+                "action_target_screen": "SCREEN_DASHBOARD"
+            }
 
 sarvam_service = SarvamService()
