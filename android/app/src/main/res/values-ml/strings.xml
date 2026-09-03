@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">DFund</string>
+    <string name="notification_service_label">DFund UPI അറിയിപ്പ് നിരീക്ഷകൻ</string>
+
+    <!-- Navigation & Headers -->
+    <string name="nav_dashboard">എന്റെ പണം</string>
+    <string name="nav_calculator">സമ്പാദ്യ വളർച്ച</string>
+    <string name="nav_transactions">ഇടപാടുകൾ</string>
+    <string name="nav_settings">ക്രമീകരണങ്ങൾ</string>
+
+    <!-- Three Buckets Dashboard -->
+    <string name="bucket_safety_title">സുരക്ഷാ ഫണ്ട് (Safety Shield)</string>
+    <string name="bucket_safety_desc">അടിയന്തര സാഹചര്യങ്ങൾക്കായി സൂക്ഷിച്ച സുരക്ഷിതമായ തുക</string>
+    <string name="bucket_dues_title">വരാനിരിക്കുന്ന അടവുകൾ &amp; EMI</string>
+    <string name="bucket_dues_desc">ഈ മാസം അടയ്ക്കാനുള്ള ബില്ലുകളും ലോൺ തവണകളും</string>
+    <string name="bucket_growth_title">വളർച്ചാ കലവറ (Growth Pot)</string>
+    <string name="bucket_growth_desc">വളർച്ചയ്ക്കായി മാറ്റിവെക്കാവുന്ന നിങ്ങളുടെ ചെറിയ മിച്ച തുക</string>
+
+    <!-- Smart Surplus Radar -->
+    <string name="surplus_detected_title">അധിക തുക ലഭ്യമാണ്!</string>
+    <string name="surplus_detected_msg">നിങ്ങൾക്ക് ₹%1$s മിച്ചമുണ്ട്. ഇത് ബാങ്കിൽ വെറുതെ സൂക്ഷിക്കരുത്!</string>
+    <string name="btn_see_growth_options">എങ്ങനെ വളർത്താമെന്ന് കാണുക</string>
+    <string name="btn_voice_action">സംസാരിക്കാൻ അമർത്തുക</string>
+
+    <!-- Financial Overviews -->
+    <string name="label_income">വരുമാനം</string>
+    <string name="label_spending">ചെലവ്</string>
+    <string name="label_balance">കൈവശം ഉള്ളത്</string>
+    <string name="label_emi">മൊത്തം EMI</string>
+    <string name="label_no_emis">തീർപ്പാക്കാത്ത EMI-കൾ ഒന്നുമില്ല!</string>
+
+    <!-- SIP & Investment Comparer -->
+    <string name="sip_calc_title">ചെറുസമ്പാദ്യ &amp; SIP കാൽക്കുലേറ്റർ</string>
+    <string name="sip_monthly_label">പ്രതിമാസം എത്ര തുക സൂക്ഷിക്കാം?</string>
+    <string name="sip_tenure_label">എത്ര വർഷത്തേക്ക്?</string>
+    <string name="sip_invested">നിക്ഷേപിച്ച ആകെ തുക</string>
+    <string name="sip_projected">പ്രതീക്ഷിക്കുന്ന ആകെ മൂല്യം</string>
+    <string name="sip_gain">നിങ്ങളുടെ ലാഭം</string>
+
+    <!-- 3-Way Comparison -->
+    <string name="compare_idle_bank">ബാങ്കിൽ ഇട്ടാൽ (3%%)</string>
+    <string name="compare_recurring_deposit">ആവർത്തന നിക്ഷേപം / RD (7%%)</string>
+    <string name="compare_micro_sip">മൈക്രോ SIP മ്യൂച്വൽ ഫണ്ട് (12.5%%)</string>
+    <string name="compare_gold">ഡിജിറ്റൽ സ്വർണ്ണം (10%%)</string>
+
+    <!-- Voice Dialog -->
+    <string name="voice_dialog_title">DFund വോയ്‌സ് അസിസ്റ്റന്റ്</string>
+    <string name="voice_listening">കേൾക്കുന്നു… മലയാളത്തിൽ സംസാരിക്കൂ</string>
+    <string name="voice_processing">വിവരങ്ങൾ പരിശോധിക്കുന്നു…</string>
+    <string name="voice_example_1">പറഞ്ഞുനോക്കൂ: "ഭക്ഷണ ചെലവുകൾ കാണിക്കുക"</string>
+    <string name="voice_example_2">പറഞ്ഞുനോക്കൂ: "പ്രതിമാസം 500 രൂപയ്ക്ക് 3 വർഷത്തെ SIP കണക്കാക്കുക"</string>
+    <string name="voice_example_3">പറഞ്ഞുനോക്കൂ: "എന്റെ EMI വിവരങ്ങൾ പരിശോധിക്കൂ"</string>
+    <string name="btn_close">അടയ്ക്കുക</string>
+
+    <!-- Mock Generator & SMS Ingestion -->
+    <string name="btn_load_sample_data">മാതൃകാ ഇടപാടുകൾ ചേർക്കുക</string>
+    <string name="sample_data_loaded">മാതൃകാ ഇടപാടുകൾ വിജയകരമായി ചേർത്തു!</string>
+    <string name="permission_sms_rationale">നിങ്ങളുടെ UPI ഇടപാടുകൾ രേഖപ്പെടുത്താൻ SMS അനുമതി ആവശ്യമാണ്.</string>
+    <string name="permission_audio_rationale">നിങ്ങളുടെ മാതൃഭാഷയിൽ ശബ്ദം ഉപയോഗിച്ച് ആപ്പ് നിയന്ത്രിക്കാൻ മൈക്രോഫോൺ അനുമതി ആവശ്യമാണ്.</string>
+</resources>

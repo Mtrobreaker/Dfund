@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/canvas_bg">
+
+    <!-- Top App Bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface_card"
+        app:elevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/app_name"
+                android:textColor="@color/text_primary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02" />
+
+            <!-- Dark / Light Theme Toggle Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_theme_toggle"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="8dp"
+                android:padding="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                app:icon="@drawable/ic_mode_dark"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="20dp"
+                app:iconTint="@color/text_primary"
+                app:backgroundTint="@color/chip_bg"
+                app:strokeColor="@color/chip_stroke"
+                app:strokeWidth="1dp"
+                app:cornerRadius="21dp"
+                android:contentDescription="Toggle Dark and Light Mode" />
+
+            <!-- Language Switcher Chip Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_language_selector"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EN / தமிழ்"
+                android:textSize="12sp"
+                android:textColor="@color/text_primary"
+                app:backgroundTint="@color/chip_bg"
+                app:strokeColor="@color/chip_stroke"
+                app:strokeWidth="1dp"
+                app:cornerRadius="16dp" />
+
+        </LinearLayout>
+
+        <!-- Subtle Top Border Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Main Fragment Content Area -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="76dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <!-- Persistent Floating Voice Action Mic FAB -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_voice_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="92dp"
+        android:text="@string/btn_voice_action"
+        android:textColor="@color/on_primary"
+        android:textStyle="bold"
+        app:icon="@drawable/ic_mic"
+        app:iconTint="@color/on_primary"
+        android:backgroundTint="@color/brand_blue"
+        app:elevation="4dp" />
+
+    <!-- Bottom Navigation Bar with Top Border -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:background="@color/surface_card"
+            app:elevation="0dp"
+            app:menu="@menu/bottom_nav_menu"
+            app:itemTextColor="@color/nav_item_colors"
+            app:itemIconTint="@color/nav_item_colors"
+            app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator" />
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

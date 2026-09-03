@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">DFund</string>
+    <string name="notification_service_label">DFund UPI Alerts Listener</string>
+
+    <!-- Navigation & Headers -->
+    <string name="nav_dashboard">My Money</string>
+    <string name="nav_calculator">Grow Money</string>
+    <string name="nav_transactions">Transactions</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Three Buckets Dashboard -->
+    <string name="bucket_safety_title">Safety Shield</string>
+    <string name="bucket_safety_desc">Safe money reserved for sudden emergency or slow work days</string>
+    <string name="bucket_dues_title">Upcoming Dues &amp; EMIs</string>
+    <string name="bucket_dues_desc">Bills and loan installments to pay this month</string>
+    <string name="bucket_growth_title">Growth Pot</string>
+    <string name="bucket_growth_desc">Your small extra money ready to grow safely</string>
+
+    <!-- Smart Surplus Radar -->
+    <string name="surplus_detected_title">Extra Money Available!</string>
+    <string name="surplus_detected_msg">You have ₹%1$s surplus. Don\'t leave it idle in your bank account!</string>
+    <string name="btn_see_growth_options">See How It Can Grow</string>
+    <string name="btn_voice_action">Tap &amp; Speak</string>
+
+    <!-- Financial Overviews -->
+    <string name="label_income">Earned</string>
+    <string name="label_spending">Spent</string>
+    <string name="label_balance">Current Balance</string>
+    <string name="label_emi">Total EMI</string>
+    <string name="label_no_emis">No pending EMIs detected! Great job.</string>
+
+    <!-- SIP & Investment Comparer -->
+    <string name="sip_calc_title">Small Savings &amp; SIP Calculator</string>
+    <string name="sip_monthly_label">How much can you save monthly?</string>
+    <string name="sip_tenure_label">For how many years?</string>
+    <string name="sip_invested">Total You Put In</string>
+    <string name="sip_projected">Expected Total Value</string>
+    <string name="sip_gain">Your Profit</string>
+
+    <!-- 3-Way Comparison -->
+    <string name="compare_idle_bank">Idle in Bank (3%%)</string>
+    <string name="compare_recurring_deposit">Fixed/Recurring Deposit (7%%)</string>
+    <string name="compare_micro_sip">Micro-SIP Index (12.5%%)</string>
+    <string name="compare_gold">Digital Gold (10%%)</string>
+
+    <!-- Voice Dialog -->
+    <string name="voice_dialog_title">DFund Financial Voice Assistant</string>
+    <string name="voice_listening">Listening… Speak in English, தமிழ், తెలుగు, or മലയാളം</string>
+    <string name="voice_processing">Understanding your request…</string>
+    <string name="voice_example_1">Try saying: "Show my food expenses"</string>
+    <string name="voice_example_2">Try saying: "Calculate SIP for ₹500 for 3 years"</string>
+    <string name="voice_example_3">Try saying: "Check my upcoming EMIs"</string>
+    <string name="btn_close">Close</string>
+
+    <!-- Mock Generator & SMS Ingestion -->
+    <string name="btn_load_sample_data">Load Sample Gig Worker Transactions</string>
+    <string name="sample_data_loaded">Sample transactions added successfully!</string>
+    <string name="permission_sms_rationale">DFund needs SMS permission to automatically track your bank UPI expenses and upcoming EMIs without manual typing.</string>
+    <string name="permission_audio_rationale">DFund needs Microphone access to let you command the app using your voice in your native language.</string>
+</resources>

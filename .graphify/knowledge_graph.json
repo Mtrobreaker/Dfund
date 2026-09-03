@@ -1,0 +1,231 @@
+{
+  "project": {
+    "name": "DFund",
+    "description": "AI-Powered Automated Personal Finance & Financial Awareness Android Application designed for ordinary people, gig workers, irregular income earners, and parents.",
+    "version": "0.1.0",
+    "created_at": "2026-09-03T17:49:00+05:30",
+    "updated_at": "2026-09-03T22:23:00+05:30",
+    "status": "deployed_to_device"
+  },
+  "nodes": [
+    {
+      "id": "node-target-audience",
+      "type": "requirement",
+      "label": "Target Audience",
+      "details": "Low-educated users, gig workers, irregular income individuals, non-finance background, parents with small surplus amounts."
+    },
+    {
+      "id": "node-multilingual",
+      "type": "requirement",
+      "label": "Multilingual & Voice-First UX",
+      "details": "English, Tamil, Malayalam, Telugu with Sarvam Saaras voice input and local/Android TTS support."
+    },
+    {
+      "id": "node-sms-parsing",
+      "type": "feature",
+      "label": "UPI SMS Parsing Engine",
+      "details": "Parse bank/UPI SMS messages (ContentResolver / BroadcastReceiver), detect EMIs, recurring expenses, peer transfers, debit/credit."
+    },
+    {
+      "id": "node-transparent-overview",
+      "type": "feature",
+      "label": "Transparent Financial Overview",
+      "details": "Clean display of Income, Spending, EMIs, Recurring Expenses, Savings, and Investments with irregular income smoothing."
+    },
+    {
+      "id": "node-financial-tools",
+      "type": "feature",
+      "label": "Financial Calculation Engine",
+      "details": "Pure Java business logic for SIP calculator, micro-savings planner, emergency cushion, investment projections."
+    },
+    {
+      "id": "node-ai-action-agent",
+      "type": "feature",
+      "label": "AI Action & Recommendation Agent",
+      "details": "Autonomous conversational AI (Sarvam-105B / reasoning LLM) that directly triggers in-app navigation, calculations, and financial actions based on voice/text prompts."
+    },
+    {
+      "id": "node-android-client",
+      "type": "architecture",
+      "label": "Android Client Architecture",
+      "details": "Java, XML Layouts + Material 3, MVVM + Clean Architecture, Room Database, Retrofit2/OkHttp3, Android Keystore security."
+    },
+    {
+      "id": "node-backend-service",
+      "type": "architecture",
+      "label": "FastAPI Backend Service",
+      "details": "Python + FastAPI, PostgreSQL database, AI orchestration endpoints, auth token handling, sync."
+    }
+  ],
+  "relationships": [
+    {
+      "from": "node-sms-parsing",
+      "to": "node-transparent-overview",
+      "relation": "feeds_financial_data"
+    },
+    {
+      "from": "node-transparent-overview",
+      "to": "node-ai-action-agent",
+      "relation": "informs_reasoning"
+    },
+    {
+      "from": "node-financial-tools",
+      "to": "node-ai-action-agent",
+      "relation": "executed_by"
+    },
+    {
+      "from": "node-multilingual",
+      "to": "node-android-client",
+      "relation": "localized_in"
+    },
+    {
+      "from": "node-android-client",
+      "to": "node-backend-service",
+      "relation": "communicates_with"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task-init",
+      "title": "Project Setup & Requirement Alignment (Grill-Me)",
+      "status": "completed"
+    },
+    {
+      "id": "task-android-scaffold",
+      "title": "Android Project Scaffolding (Java + Gradle + MVVM + Material 3)",
+      "status": "completed"
+    },
+    {
+      "id": "task-fastapi-scaffold",
+      "title": "FastAPI Backend Scaffolding with PostgreSQL / SQLite schema",
+      "status": "completed"
+    },
+    {
+      "id": "task-sms-parser",
+      "title": "SMS UPI Parser & Categorization Engine in Java",
+      "status": "completed"
+    },
+    {
+      "id": "task-financial-engine",
+      "title": "Java Financial Math & Projections Module",
+      "status": "completed"
+    },
+    {
+      "id": "task-voice-ai",
+      "title": "Sarvam Voice & AI Action Routing Integration",
+      "status": "completed"
+    },
+    {
+      "id": "task-ui-screens",
+      "title": "Material 3 Accessible XML Layouts (English, Tamil, Malayalam, Telugu)",
+      "status": "completed"
+    },
+    {
+      "id": "task-verification",
+      "title": "Automated Testing & Multi-lingual Verification",
+      "status": "completed"
+    },
+    {
+      "id": "task-apk-deployment",
+      "title": "Android APK Compilation & Live Physical Device Deployment",
+      "status": "completed"
+    },
+    {
+      "id": "task-real-device-fixes",
+      "title": "Real-Device SMS Inbox Scanner, Bucket Calculations & Live Speech Recognition",
+      "status": "completed"
+    },
+    {
+      "id": "task-white-theme-redesign",
+      "title": "Attractive White/Light Theme Redesign (Fintech Aesthetic & Device Verification)",
+      "status": "completed"
+    },
+    {
+      "id": "task-automation-scripts",
+      "title": "1-Click Automation Scripts & Windows PATH Setup",
+      "status": "completed"
+    },
+    {
+      "id": "task-sarvam-tamil-ollama",
+      "title": "Automatic SMS Reader & Sarvam-Tamil-Ollama (Minimax-M3) Voice Architecture",
+      "status": "completed"
+    },
+    {
+      "id": "task-theme-toggle",
+      "title": "Instant Dark & White Mode Toggle with Material 3 Obsidian Night Theme",
+      "status": "completed"
+    },
+    {
+      "id": "task-auto-execution",
+      "title": "Autonomous Action Execution & Exact Spoken Numerical Result Announcements",
+      "status": "completed"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "dec-auto-execution",
+      "title": "Autonomous Voice Action Navigation with Explicit Spoken Results",
+      "reasoning": "Users requested seamless execution after voice prompt without needing manual button confirmation, along with unambiguous spoken statements of what was done and exact figures (e.g. SIP compound growth, EMI totals, category spends)."
+    },
+    {
+      "id": "dec-tech-stack",
+      "title": "Strict Tech Stack Adherence",
+      "rationale": "Java, XML + Material 3, Room, MVVM, Python FastAPI backend, PostgreSQL, Sarvam AI/Voice."
+    },
+    {
+      "id": "dec-upi-ingestion",
+      "title": "Hybrid UPI Transaction Ingestion",
+      "rationale": "Request READ_SMS and RECEIVE_SMS permissions with automatic fallback to NotificationListenerService (for GPay/PhonePe/Paytm/BHIM push alerts) and built-in sample transaction generator for rapid testing."
+    },
+    {
+      "id": "dec-ai-action-dispatch",
+      "title": "Structured Tool Dispatch & Action Router",
+      "rationale": "FastAPI with Sarvam AI outputs structured tool-calling JSON payloads (action, parameters, spoken_response). Android Java ViewModel/Navigator dynamically dispatches the UI action and triggers localized TTS feedback."
+    },
+    {
+      "id": "dec-voice-pipeline",
+      "title": "Backend Audio Proxy Architecture",
+      "rationale": "Android streams audio recording (WAV) to FastAPI /api/voice/interact. FastAPI queries Sarvam Saaras STT, runs AI reasoning for intent & parameters, and returns transcribed text, action payload, and TTS in a unified round-trip."
+    },
+    {
+      "id": "dec-mental-model",
+      "title": "Three Buckets & Smart Surplus Radar",
+      "rationale": "Intuitive 3-Bucket model tailored for irregular income & parents: 1) Safety Shield (Emergency cushion), 2) Upcoming Dues (EMIs/Bills via SMS), 3) Growth Pot (Small surplus comparison: SIP vs RD vs Gold) with persistent Floating Voice Action Mic."
+    },
+    {
+      "id": "dec-backend-db",
+      "title": "FastAPI + Docker Compose PostgreSQL (with SQLite fallback)",
+      "rationale": "Containerized PostgreSQL via docker-compose with automated fallback to SQLite if Docker is inactive, allowing seamless local development with zero friction."
+    },
+    {
+      "id": "dec-tts-pipeline",
+      "title": "Hybrid Audio Output Pipeline",
+      "rationale": "Native Android TTS (ta-IN, te-IN, ml-IN, en-IN) for fast low-latency UI confirmations (<100ms), and Backend Neural TTS for detailed financial advice and growth comparisons."
+    },
+    {
+      "id": "dec-financial-engine",
+      "title": "Volatility-Aware Dynamic Buffer & 3-Way Comparison",
+      "rationale": "For irregular incomes, compute rolling safety buffer before identifying surplus. Present small surplus through plain-language comparisons: Idle Bank (3%) vs Safe Deposit/RD (7%) vs Micro-SIP (12%) vs Gold, eliminating complex jargon."
+    },
+    {
+      "id": "dec-security-keystore",
+      "title": "Hardware Keystore + EncryptedSharedPreferences + Biometric Lock",
+      "rationale": "AES-256-GCM hardware-backed MasterKey via Android Keystore, EncryptedSharedPreferences for session tokens and preferences, with optional BiometricPrompt for app access security."
+    },
+    {
+      "id": "dec-ui-theme",
+      "title": "Modern Minimalist Light Theme with Auto Dark Mode",
+      "rationale": "Material 3 clean design with #FAFAFA canvas, elevated cards, high-contrast semantic chips (Green=Savings, Amber=Due, Blue=Safety), large bold typography (24-32sp for numbers), and prominent voice FAB."
+    },
+    {
+      "id": "dec-sarvam-tamil-ollama",
+      "title": "Sarvam-Tamil-Ollama (Minimax-M3) Multi-Stage AI Pipeline",
+      "rationale": "Sarvam Saaras STT hears the voice -> Sarvam Translate translates user prompt into Tamil -> Ollama Cloud Minimax-M3 analyzes user cashflow ledger with Tamil query to generate financial advice -> Sarvam Bulbul v3 synthesizes speech in user's language -> App displays advice card on dashboard and in voice dialog with action trigger."
+    },
+    {
+      "id": "dec-theme-toggle",
+      "title": "1-Tap Dark & White Mode Toggle",
+      "rationale": "Instant top-bar toggle button using Material 3 DayNight themes and an obsidian dark palette. User preference is securely persisted across app sessions via SecurityManager."
+    }
+  ]
+}

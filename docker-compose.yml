@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: dfund_postgres
+    environment:
+      POSTGRES_USER: dfund_user
+      POSTGRES_PASSWORD: dfund_secure_password
+      POSTGRES_DB: dfund_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dfund_user -d dfund_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dfund_backend
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://dfund_user:dfund_secure_password@postgres:5432/dfund_db
+      - SARVAM_API_KEY=${SARVAM_API_KEY:-mock_key}
+      - ENVIRONMENT=production
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:

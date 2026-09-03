@@ -1,0 +1,39 @@
+# Environment variables
+.env
+**/.env
+**/.env.*
+!**/.env.example
+
+# Java & Android
+*.class
+bin/
+**/bin/
+local.properties
+**/local.properties
+.gradle/
+**/.gradle/
+build/
+**/build/
+captures/
+*.apk
+!DFund-app-debug.apk
+
+# Python
+*.pyc
+**/__pycache__/
+.pytest_cache/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+dfund_dev.db
+
+# IDE & Editor
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
