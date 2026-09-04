@@ -1,0 +1,50 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp"
+    android:height="140dp"
+    android:viewportWidth="360"
+    android:viewportHeight="140">
+
+    <!-- Soft Light Green Background Waves -->
+    <path
+        android:fillColor="#EBF8F2"
+        android:pathData="M0,140 L360,140 L360,70 C300,90 240,115 170,105 C100,95 50,115 0,130 Z" />
+
+    <path
+        android:fillColor="#F2FAF5"
+        android:pathData="M0,140 L360,140 L360,95 C290,105 210,120 140,115 C70,110 30,125 0,135 Z" />
+
+    <!-- Upward Growth Green Trajectory Line -->
+    <path
+        android:strokeColor="@color/growth_emerald"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000"
+        android:pathData="M20,130 C100,135 150,125 200,105 C250,85 300,50 345,15" />
+
+    <!-- Arrow head at top right -->
+    <path
+        android:fillColor="@color/growth_emerald"
+        android:pathData="M345,15 L335,18 L342,26 Z" />
+
+    <!-- Growth Milestones / Nodes -->
+    <!-- Node 1: Solid Start Dot -->
+    <path
+        android:fillColor="@color/heading_dark_green"
+        android:pathData="M20,130 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+
+    <!-- Node 2: Hollow Ring 1 -->
+    <path
+        android:strokeColor="@color/growth_emerald"
+        android:strokeWidth="2"
+        android:fillColor="#FFFFFF"
+        android:pathData="M195,107 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+
+    <!-- Node 3: Hollow Ring 2 -->
+    <path
+        android:strokeColor="@color/growth_emerald"
+        android:strokeWidth="2"
+        android:fillColor="#FFFFFF"
+        android:pathData="M275,70 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+
+</vector>

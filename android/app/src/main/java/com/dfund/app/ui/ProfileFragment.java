@@ -74,11 +74,11 @@ public class ProfileFragment extends Fragment {
         switchThemeMode = view.findViewById(R.id.switch_theme_mode);
         switchBiometric = view.findViewById(R.id.switch_biometric);
 
-        loadProfileData();
-        setupListeners();
+        loadProfileData(view);
+        setupListeners(view);
     }
 
-    private void loadProfileData() {
+    private void loadProfileData(View view) {
         tvProfileName.setText(securityManager.getUserName());
         String devId = securityManager.getDeviceId();
         tvProfileAccountId.setText(getString(R.string.profile_account_id, devId));
@@ -96,7 +96,16 @@ public class ProfileFragment extends Fragment {
         }
 
         switchThemeMode.setChecked(securityManager.isDarkMode());
-        switchBiometric.setChecked(securityManager.isBiometricEnabled());
+        switchBiometric.setChecked(securityManager.isBiometricEnabled());        TextView tvFinSummary = view.findViewById(R.id.tv_profile_financial_summary);
+        if (tvFinSummary != null) {
+            String job = securityManager.getJobType();
+            if (job == null || job.isEmpty()) job = "Salaried";
+            double inc = securityManager.getTypicalIncome();
+            if (inc <= 0) inc = 25000;
+            double ess = securityManager.getMandatoryExpensesTotal();
+            if (ess <= 0) ess = 16800;
+            tvFinSummary.setText(String.format(Locale.getDefault(), "Work: %s · Income: ₹%,.0f · Essentials: ₹%,.0f", job, inc, ess));
+        }
 
         String lang = securityManager.getLanguage();
         if ("ta".equals(lang)) {
@@ -110,7 +119,7 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    private void setupListeners() {
+    private void setupListeners(View view) {
         // Edit Name Dialog
         btnEditName.setOnClickListener(v -> showEditNameDialog());
 
@@ -170,6 +179,22 @@ public class ProfileFragment extends Fragment {
 
         // Logout Action
         btnLogoutAction.setOnClickListener(v -> showLogoutConfirmationDialog());
+
+        // Retake Onboarding / Financial Setup
+        View btnRetake = view.findViewById(R.id.btn_retake_onboarding);
+        if (btnRetake != null) {
+            btnRetake.setOnClickListener(v -> {
+                if (getActivity() instanceof MainActivity) {
+                    MainActivity main = (MainActivity) getActivity();
+                    main.setBottomNavVisibility(false);
+                    main.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new com.dfund.app.ui.onboarding.LanguageSelectionFragment())
+                        .addToBackStack(null)
+                        .commitAllowingStateLoss();
+                }
+            });
+        }
     }
 
     private void showEditNameDialog() {
@@ -210,17 +235,14 @@ public class ProfileFragment extends Fragment {
 
         Toast.makeText(requireContext(), R.string.logout_toast, Toast.LENGTH_LONG).show();
 
-        // Navigate back to Dashboard and synchronize bottom navigation
-        if (getActivity() != null) {
-            BottomNavigationView bottomNav = getActivity().findViewById(R.id.bottom_navigation);
-            if (bottomNav != null) {
-                bottomNav.setSelectedItemId(R.id.nav_dashboard);
-            } else {
-                getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new DashboardFragment(), "DASHBOARD")
-                    .commit();
-            }
+        // Navigate back to Splash / Onboarding flow
+        if (getActivity() instanceof MainActivity) {
+            MainActivity main = (MainActivity) getActivity();
+            main.setBottomNavVisibility(false);
+            main.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new com.dfund.app.ui.onboarding.LanguageSelectionFragment())
+                .commitAllowingStateLoss();
         }
     }
 }

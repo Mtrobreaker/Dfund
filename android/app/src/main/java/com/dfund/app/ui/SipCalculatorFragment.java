@@ -5,12 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import com.dfund.app.R;
 import com.dfund.app.domain.FinancialMathEngine;
+import com.dfund.app.ui.voice.VoiceActiveDialogFragment;
+import com.dfund.app.ui.voice.VoiceInteractionManager;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.slider.Slider;
+
+import java.text.NumberFormat;
 import java.util.Locale;
 
 public class SipCalculatorFragment extends Fragment {
@@ -18,21 +26,15 @@ public class SipCalculatorFragment extends Fragment {
     private static final String ARG_TENURE = "arg_tenure";
 
     private Slider sliderMonthlyAmount;
-    private Slider sliderTenure;
     private TextView tvMonthlyAmountVal;
-    private TextView tvTenureYearsVal;
-    private TextView tvTotalMaturityValue;
-    private TextView tvTotalInvested;
-    private TextView tvNetGain;
+    private TextView tvInvestedAmountVal;
+    private TextView tvMaturityAmountVal;
+    private ChipGroup chipGroupDuration;
+    private VoiceInteractionManager voiceManager;
 
-    private TextView tvCompareBankVal;
-    private TextView tvCompareRdVal;
-    private TextView tvCompareSipVal;
-    private TextView tvCompareGoldVal;
-    private TextView tvComparisonAdvice;
-
-    private double monthlyAmount = 500.0;
+    private double monthlyAmount = 1500.0;
     private int tenureYears = 3;
+    private final NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
 
     public static SipCalculatorFragment newInstance(double amount, int tenureYears) {
         SipCalculatorFragment fragment = new SipCalculatorFragment();
@@ -46,85 +48,79 @@ public class SipCalculatorFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sip_calculator, container, false);
+        return inflater.inflate(R.layout.fragment_sip_calculator, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        voiceManager = new VoiceInteractionManager(requireContext());
+        currencyFormatter.setMaximumFractionDigits(0);
 
         sliderMonthlyAmount = view.findViewById(R.id.slider_monthly_amount);
-        sliderTenure = view.findViewById(R.id.slider_tenure);
         tvMonthlyAmountVal = view.findViewById(R.id.tv_monthly_amount_val);
-        tvTenureYearsVal = view.findViewById(R.id.tv_tenure_years_val);
-        tvTotalMaturityValue = view.findViewById(R.id.tv_total_maturity_value);
-        tvTotalInvested = view.findViewById(R.id.tv_total_invested);
-        tvNetGain = view.findViewById(R.id.tv_net_gain);
-
-        tvCompareBankVal = view.findViewById(R.id.tv_compare_bank_val);
-        tvCompareRdVal = view.findViewById(R.id.tv_compare_rd_val);
-        tvCompareSipVal = view.findViewById(R.id.tv_compare_sip_val);
-        tvCompareGoldVal = view.findViewById(R.id.tv_compare_gold_val);
-        tvComparisonAdvice = view.findViewById(R.id.tv_comparison_advice);
+        tvInvestedAmountVal = view.findViewById(R.id.tv_invested_amount_val);
+        tvMaturityAmountVal = view.findViewById(R.id.tv_maturity_amount_val);
+        chipGroupDuration = view.findViewById(R.id.chip_group_duration);
 
         if (getArguments() != null) {
-            monthlyAmount = getArguments().getDouble(ARG_AMOUNT, 500.0);
+            monthlyAmount = getArguments().getDouble(ARG_AMOUNT, 1500.0);
             tenureYears = getArguments().getInt(ARG_TENURE, 3);
         }
 
-        sliderMonthlyAmount.setValue((float) Math.min(Math.max(monthlyAmount, 100.0), 10000.0));
-        sliderTenure.setValue((float) Math.min(Math.max(tenureYears, 1), 15));
+        sliderMonthlyAmount.setValue((float) Math.min(Math.max(monthlyAmount, 500.0), 10000.0));
 
-        setupListeners(view);
-        recalculate();
-
-        return view;
-    }
-
-    private void setupListeners(View view) {
         sliderMonthlyAmount.addOnChangeListener((slider, value, fromUser) -> {
             monthlyAmount = value;
             recalculate();
         });
 
-        sliderTenure.addOnChangeListener((slider, value, fromUser) -> {
-            tenureYears = (int) value;
+        chipGroupDuration.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.chip_1yr) tenureYears = 1;
+            else if (checkedId == R.id.chip_3yr) tenureYears = 3;
+            else if (checkedId == R.id.chip_5yr) tenureYears = 5;
+            else if (checkedId == R.id.chip_10yr) tenureYears = 10;
             recalculate();
         });
 
-        // Quick Preset Chips
-        view.findViewById(R.id.chip_amt_200).setOnClickListener(v -> setAmountPreset(200.0));
-        view.findViewById(R.id.chip_amt_500).setOnClickListener(v -> setAmountPreset(500.0));
-        view.findViewById(R.id.chip_amt_1000).setOnClickListener(v -> setAmountPreset(1000.0));
-        view.findViewById(R.id.chip_amt_2000).setOnClickListener(v -> setAmountPreset(2000.0));
-    }
+        // "Ask DFund" Suggestion Chips (Image 7)
+        view.findViewById(R.id.chipAskSip).setOnClickListener(v -> openVoiceQuery("What is a Systematic Investment Plan (SIP) and how does it work?"));
+        view.findViewById(R.id.chipAskAfford).setOnClickListener(v -> openVoiceQuery("Can I afford to invest 2000 rupees every month with my current budget?"));
+        view.findViewById(R.id.chipAskGold).setOnClickListener(v -> openVoiceQuery("Is gold savings better or is a mutual fund SIP better for long-term growth?"));
 
-    private void setAmountPreset(double amt) {
-        monthlyAmount = amt;
-        sliderMonthlyAmount.setValue((float) amt);
+        view.findViewById(R.id.btnAskDfundVoice).setOnClickListener(v -> {
+            VoiceActiveDialogFragment dialog = VoiceActiveDialogFragment.newInstance();
+            dialog.setVoiceInteractionManager(voiceManager);
+            dialog.show(getParentFragmentManager(), "VOICE_DIALOG");
+        });
+
         recalculate();
     }
 
+    private void openVoiceQuery(String query) {
+        VoiceActiveDialogFragment dialog = VoiceActiveDialogFragment.newInstance();
+        dialog.setVoiceInteractionManager(voiceManager);
+        dialog.show(getParentFragmentManager(), "VOICE_DIALOG");
+    }
+
     private void recalculate() {
-        tvMonthlyAmountVal.setText(String.format(Locale.getDefault(), "₹%.0f / mo", monthlyAmount));
-        tvTenureYearsVal.setText(String.format(Locale.getDefault(), "%d Years", tenureYears));
+        if (tvMonthlyAmountVal == null) return;
 
-        // 1. Calculate Expected Micro-SIP Return (12.5% p.a.)
-        FinancialMathEngine.SipResult sipResult = FinancialMathEngine.calculateSip(monthlyAmount, 12.5, tenureYears);
-        tvTotalMaturityValue.setText(String.format(Locale.getDefault(), "₹%.2f", sipResult.totalMaturityValue));
-        tvTotalInvested.setText(String.format(Locale.getDefault(), "₹%.2f", sipResult.investedAmount));
-        tvNetGain.setText(String.format(Locale.getDefault(), "+ ₹%.2f", sipResult.estimatedReturns));
+        tvMonthlyAmountVal.setText(currencyFormatter.format(monthlyAmount));
 
-        // 2. 4-Way Comparison for the small surplus:
-        FinancialMathEngine.SurplusComparison comp = FinancialMathEngine.compareSurplus(monthlyAmount * 12 * tenureYears, tenureYears);
-        // Compare annualized options:
-        double totalPrincipal = monthlyAmount * 12 * tenureYears;
-        double idleBank = totalPrincipal * Math.pow(1.0 + 0.03, tenureYears);
-        double rd = totalPrincipal * Math.pow(1.0 + 0.07, tenureYears);
-        double gold = totalPrincipal * Math.pow(1.0 + 0.10, tenureYears);
+        double totalInvested = monthlyAmount * tenureYears * 12;
+        // Assume conservative equity index return of 12% p.a.
+        double estimatedMaturity = FinancialMathEngine.calculateSipMaturity(monthlyAmount, tenureYears, 12.0);
 
-        tvCompareBankVal.setText(String.format(Locale.getDefault(), "₹%.0f", idleBank));
-        tvCompareRdVal.setText(String.format(Locale.getDefault(), "₹%.0f", rd));
-        tvCompareSipVal.setText(String.format(Locale.getDefault(), "₹%.0f", sipResult.totalMaturityValue));
-        tvCompareGoldVal.setText(String.format(Locale.getDefault(), "₹%.0f", gold));
+        tvInvestedAmountVal.setText(currencyFormatter.format(totalInvested));
+        tvMaturityAmountVal.setText(currencyFormatter.format(estimatedMaturity));
+    }
 
-        tvComparisonAdvice.setText(String.format(Locale.getDefault(),
-            "💡 Notice: Keeping ₹%.0f in bank yields only ₹%.0f, while a disciplined Micro-SIP reaches approx ₹%.0f (+₹%.0f extra wealth)!",
-            totalPrincipal, idleBank, sipResult.totalMaturityValue, (sipResult.totalMaturityValue - idleBank)));
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (voiceManager != null) {
+            voiceManager.destroy();
+        }
     }
 }

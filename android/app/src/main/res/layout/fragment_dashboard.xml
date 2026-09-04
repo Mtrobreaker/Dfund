@@ -1,492 +1,612 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@color/canvas_bg"
-    android:padding="16dp">
+    android:background="@color/canvas_white"
+    android:clipToPadding="false"
+    android:paddingBottom="160dp"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <!-- Top Welcome & Financial Overview Headline -->
+        <!-- Top Header Bar (Matching Reference Image 8) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="4dp">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Official DFund Geometric Logo -->
+            <ImageView
+                android:id="@+id/imgTopLogo"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_dfund_logo" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="My Cashflow"
-                android:textColor="@color/text_secondary"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.05" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This Month's Summary"
-                android:textColor="@color/text_primary"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:letterSpacing="0.05"
+                android:text="@string/brand_name"
+                android:textColor="@color/primary_dark_green"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginTop="2dp" />
+                android:textStyle="bold" />
+
+            <!-- Notification Bell with Alert Dot -->
+            <ImageView
+                android:id="@+id/btnNotification"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="@drawable/bg_icon_sq"
+                android:contentDescription="Notifications"
+                android:padding="9dp"
+                android:src="@drawable/ic_bell_dot"
+                app:tint="@color/primary_dark_green" />
+
+            <!-- User Avatar Circle "R" -->
+            <TextView
+                android:id="@+id/btnAvatarProfile"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_avatar_circle"
+                android:gravity="center"
+                android:text="R"
+                android:textColor="@color/primary_dark_green"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
-        <!-- Income & Expense Top Overview Strip -->
-        <LinearLayout
+        <!-- Greeting Section -->
+        <TextView
+            android:id="@+id/txtGreeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/good_morning_user"
+            android:textColor="@color/primary_dark_green"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtGreetingSub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/home_greeting_sub"
+            android:textColor="@color/text_muted"
+            android:textSize="14sp" />
+
+        <!-- Spending & Savings Hero Card (Matching Reference Image 8 exactly) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardHeroSpending"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_marginBottom="16dp">
+            android:layout_marginTop="18dp"
+            app:cardBackgroundColor="@color/surface_light_green"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/border_light_green"
+            app:strokeWidth="1.5dp">
 
-            <!-- Earned Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="6dp"
-                app:cardBackgroundColor="@color/surface_card"
-                app:cardCornerRadius="18dp"
-                app:strokeColor="@color/card_border"
-                app:strokeWidth="1dp"
-                app:cardElevation="1dp">
+                android:orientation="horizontal"
+                android:padding="16dp">
 
+                <!-- Left Column: This Month's Spending + Limit + Progress + 70% Alert -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/label_income"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+"
-                            android:textColor="@color/growth_emerald"
-                            android:background="@color/growth_emerald_light"
-                            android:paddingHorizontal="6dp"
-                            android:paddingVertical="1dp"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                    android:layout_weight="1.15"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_total_income"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="₹0.00"
-                        android:textColor="@color/growth_emerald"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="6dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Spent Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="6dp"
-                app:cardBackgroundColor="@color/surface_card"
-                app:cardCornerRadius="18dp"
-                app:strokeColor="@color/card_border"
-                app:strokeWidth="1dp"
-                app:cardElevation="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/label_spending"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="-"
-                            android:textColor="@color/alert_coral"
-                            android:background="@color/alert_coral_light"
-                            android:paddingHorizontal="8dp"
-                            android:paddingVertical="1dp"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                        android:text="@string/this_months_spending"
+                        android:textColor="@color/text_muted"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_total_spent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="₹0.00"
-                        android:textColor="@color/alert_coral"
+                        android:layout_marginTop="4dp"
+                        android:text="₹16,800"
+                        android:textColor="@color/primary_dark_green"
                         android:textSize="22sp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="6dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
+                        android:textStyle="bold" />
 
-        <!-- AI SMART ADVISOR CARD (Minimax-M3 & Sarvam Powered) -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_ai_advisor"
+                    <TextView
+                        android:id="@+id/tv_spending_limit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="of ₹24,000 limit"
+                        android:textColor="@color/text_muted"
+                        android:textSize="12sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progressSpending"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="10dp"
+                        android:max="100"
+                        android:progress="70"
+                        android:progressDrawable="@drawable/bg_progress_green" />
+
+                    <!-- Warning: 70% used (RED strictly reserved for overspending alert) -->
+                    <TextView
+                        android:id="@+id/tv_spending_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="70% used"
+                        android:textColor="@color/alert_red"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Vertical Divider -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginEnd="14dp"
+                    android:background="@color/border_light_green" />
+
+                <!-- Right Column: Remaining Limit & Saved This Month -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- Remaining Limit -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/remaining_limit"
+                        android:textColor="@color/text_muted"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_remaining_limit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="₹7,200 left"
+                        android:textColor="@color/primary_dark_green"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/border_light_green" />
+
+                    <!-- Saved This Month -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/saved_this_month"
+                        android:textColor="@color/text_muted"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_saved_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="₹3,450"
+                        android:textColor="@color/growth_green"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_saved_growth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="+12% from last month"
+                        android:textColor="@color/text_muted"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Quick Actions Header (Image 8) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="@string/quick_actions_title"
+            android:textColor="@color/primary_dark_green"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- 2x2 Quick Actions Grid (Image 8) -->
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="20dp"
-            app:strokeColor="@color/brand_blue"
-            app:strokeWidth="1.5dp"
-            app:cardElevation="3dp">
+            android:layout_marginTop="12dp"
+            android:columnCount="2"
+            android:rowCount="2">
+
+            <!-- 1. Add Income -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnQuickAddIncome"
+                android:layout_width="0dp"
+                android:layout_height="76dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/surface_light_green"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/border_light_green"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_icon_sq"
+                        android:contentDescription="Income"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_add_income"
+                        app:tint="@color/primary_dark_green" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/action_add_income"
+                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 2. Add Expense -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnQuickAddExpense"
+                android:layout_width="0dp"
+                android:layout_height="76dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/surface_light_green"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/border_light_green"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_icon_sq"
+                        android:contentDescription="Expense"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_receipt"
+                        app:tint="@color/primary_dark_green" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/action_add_expense"
+                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 3. Emergency Fund -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnQuickEmergency"
+                android:layout_width="0dp"
+                android:layout_height="76dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/surface_light_green"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/border_light_green"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_icon_sq"
+                        android:contentDescription="Emergency"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_emergency_shield"
+                        app:tint="@color/primary_dark_green" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/action_emergency_fund"
+                        android:textColor="@color/text_dark"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 4. Save & Invest -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnQuickSaveInvest"
+                android:layout_width="0dp"
+                android:layout_height="76dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/surface_light_green"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/border_light_green"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_icon_sq"
+                        android:contentDescription="Save Invest"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_save_invest"
+                        app:tint="@color/primary_dark_green" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/action_save_invest"
+                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </GridLayout>
+
+        <!-- Motivational Promotional Banner (Image 8) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPromoBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="@color/canvas_white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/border_light_green"
+            app:strokeWidth="1.5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="18dp">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_icon_sq"
+                    android:contentDescription="Plant"
+                    android:padding="9dp"
+                    android:src="@drawable/ic_seedling"
+                    app:tint="@color/primary_dark_green" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="✨ AI Financial Advisor"
-                        android:textColor="@color/brand_blue"
+                        android:text="@string/banner_small_steps_title"
+                        android:textColor="@color/primary_dark_green"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Minimax-M3"
-                        android:textColor="@color/brand_blue"
-                        android:background="@drawable/bg_pill_badge"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="3dp"
-                        android:textSize="11sp"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/banner_small_steps_desc"
+                        android:textColor="@color/text_muted"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_get_started"
+                    android:textColor="@color/primary_dark_green"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- AI Assistant / Ask DFund Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="@color/surface_light_green"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/border_light_green"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="AI"
+                        android:src="@drawable/ic_sparkle"
+                        app:tint="@color/primary_dark_green" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:text="DFund AI Advisor"
+                        android:textColor="@color/primary_dark_green"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_dashboard_listen_ai"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="🔊 Listen"
+                        android:textColor="@color/primary_dark_green"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_dashboard_ai_suggestion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Analyzing your cashflow and UPI transactions with Ollama Minimax-M3..."
-                    android:textColor="@color/text_primary"
-                    android:textSize="14sp"
-                    android:lineSpacingExtra="3dp"
-                    android:layout_marginTop="10dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="12dp">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_dashboard_listen_ai"
-                        style="@style/Widget.Material3.Button.TonalButton"
-                        android:layout_width="0dp"
-                        android:layout_height="44dp"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="6dp"
-                        android:text="🔊 Listen"
-                        android:textColor="@color/brand_blue"
-                        android:textStyle="bold"
-                        app:backgroundTint="@color/chip_bg"
-                        app:cornerRadius="10dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_dashboard_ask_ai"
-                        android:layout_width="0dp"
-                        android:layout_height="44dp"
-                        android:layout_weight="1"
-                        android:layout_marginStart="6dp"
-                        android:text="🎤 Ask Advisor"
-                        android:textColor="@color/on_primary"
-                        android:textStyle="bold"
-                        android:backgroundTint="@color/brand_blue"
-                        app:cornerRadius="10dp" />
-                </LinearLayout>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- BUCKET 1: SAFETY SHIELD (Emergency Cushion for Irregular Income) -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="20dp"
-            app:strokeColor="@color/safety_indigo_border"
-            app:strokeWidth="1.5dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/bucket_safety_title"
-                        android:textColor="@color/safety_indigo"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_safety_shield_status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Active Shield"
-                        android:textColor="@color/safety_indigo"
-                        android:background="@color/safety_indigo_light"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="4dp"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_safety_shield_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="₹0.00"
-                    android:textColor="@color/text_primary"
-                    android:textSize="28sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="8dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bucket_safety_desc"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- BUCKET 2: UPCOMING DUES & EMIs (Parsed from SMS) -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="20dp"
-            app:strokeColor="@color/gold_amber_border"
-            app:strokeWidth="1.5dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/bucket_dues_title"
-                        android:textColor="@color/gold_amber"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Upcoming"
-                        android:textColor="@color/gold_amber"
-                        android:background="@color/gold_amber_light"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="4dp"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_upcoming_emi_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="₹0.00"
-                    android:textColor="@color/text_primary"
-                    android:textSize="28sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="8dp" />
-
-                <TextView
-                    android:id="@+id/tv_upcoming_emi_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bucket_dues_desc"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- BUCKET 3: GROWTH POT & SMART SURPLUS RADAR -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_growth_pot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="20dp"
-            app:strokeColor="@color/growth_emerald_border"
-            app:strokeWidth="1.5dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/bucket_growth_title"
-                        android:textColor="@color/growth_emerald"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Smart Radar"
-                        android:textColor="@color/growth_emerald"
-                        android:background="@color/growth_emerald_light"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="4dp"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_growth_pot_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="₹0.00"
-                    android:textColor="@color/growth_emerald"
-                    android:textSize="28sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="8dp" />
-
-                <TextView
-                    android:id="@+id/tv_surplus_hint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bucket_growth_desc"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp"
-                    android:layout_marginTop="4dp" />
+                    android:layout_marginTop="8dp"
+                    android:text="Analyzing your spending patterns..."
+                    android:textColor="@color/text_dark"
+                    android:textSize="13sp" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_explore_growth"
+                    android:id="@+id/btn_dashboard_ask_ai"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:text="@string/btn_see_growth_options"
-                    android:textColor="@color/on_primary"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/primary_dark_green"
+                    android:text="Ask DFund Anything"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
                     android:textStyle="bold"
-                    android:backgroundTint="@color/growth_emerald"
-                    app:cornerRadius="14dp"
-                    android:layout_marginTop="16dp"
-                    app:elevation="2dp" />
+                    app:cornerRadius="10dp" />
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Actions: Sync SMS & Sample Data -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_scan_sms"
-            style="@style/Widget.Material3.Button.TonalButton"
+        <!-- Recent Activity Section -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="📥 Scan Bank UPI SMS Messages"
-            android:textColor="@color/brand_blue"
-            android:textStyle="bold"
-            app:backgroundTint="@color/safety_indigo_light"
-            app:strokeColor="@color/safety_indigo_border"
-            app:strokeWidth="1dp"
-            app:cornerRadius="14dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_load_mock_data"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Recent Transactions"
+                android:textColor="@color/primary_dark_green"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnSeeAllTransactions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="See all ->"
+                android:textColor="@color/growth_green"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Recent Transactions Container -->
+        <LinearLayout
+            android:id="@+id/layoutRecentTransactions"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/btn_load_sample_data"
-            android:textColor="@color/text_secondary"
-            android:textStyle="bold"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp"
-            app:cornerRadius="14dp"
-            android:layout_marginBottom="40dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical" />
+
+        <!-- Spacer for Bottom Navigation Bar -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

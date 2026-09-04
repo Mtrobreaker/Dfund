@@ -41,6 +41,10 @@ public class MainViewModel extends AndroidViewModel {
         return filteredTransactions;
     }
 
+    public LiveData<List<TransactionEntity>> getAllTransactions() {
+        return filteredTransactions;
+    }
+
     public LiveData<Double> getTotalIncome() {
         return transactionDao.getTotalIncome();
     }
@@ -87,6 +91,22 @@ public class MainViewModel extends AndroidViewModel {
         Executors.newSingleThreadExecutor().execute(() -> {
             transactionDao.insert(tx);
         });
+    }
+
+    public void addManualTransaction(String desc, double amount, String category, boolean isCredit) {
+        TransactionEntity tx = new TransactionEntity(
+            "Manual",
+            amount,
+            isCredit ? "CREDIT" : "DEBIT",
+            category,
+            desc,
+            "",
+            "Manual Entry: " + desc,
+            false,
+            false,
+            System.currentTimeMillis()
+        );
+        insertTransaction(tx);
     }
 
     public void clearAllTransactions() {

@@ -1,57 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/canvas_bg">
+    android:background="@color/canvas_white">
 
-    <!-- Top App Bar -->
+    <!-- Top App Bar (Optional header for secondary screens; Dashboard has its own header matching Image 8) -->
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/surface_card"
+        android:background="@color/canvas_white"
+        android:visibility="gone"
         app:elevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingHorizontal="20dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_dfund_logo" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:text="@string/app_name"
-                android:textColor="@color/text_primary"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:letterSpacing="-0.02" />
+                android:letterSpacing="0.05"
+                android:text="@string/brand_name"
+                android:textColor="@color/primary_dark_green"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            <!-- Dark / Light Theme Toggle Button -->
+            <!-- Dark / Light Theme Toggle -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_theme_toggle"
                 style="@style/Widget.Material3.Button.TonalButton"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
-                android:padding="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
+                android:contentDescription="Toggle Dark and Light Mode"
                 android:insetLeft="0dp"
+                android:insetTop="0dp"
                 android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                app:backgroundTint="@color/surface_light_green"
+                app:cornerRadius="20dp"
                 app:icon="@drawable/ic_mode_dark"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
                 app:iconSize="20dp"
-                app:iconTint="@color/text_primary"
-                app:backgroundTint="@color/chip_bg"
-                app:strokeColor="@color/chip_stroke"
-                app:strokeWidth="1dp"
-                app:cornerRadius="21dp"
-                android:contentDescription="Toggle Dark and Light Mode" />
+                app:iconTint="@color/primary_dark_green"
+                app:strokeColor="@color/border_light_green"
+                app:strokeWidth="1dp" />
 
             <!-- Language Switcher Chip Button -->
             <com.google.android.material.button.MaterialButton
@@ -60,71 +68,71 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="EN / தமிழ்"
+                android:textColor="@color/primary_dark_green"
                 android:textSize="12sp"
-                android:textColor="@color/text_primary"
-                app:backgroundTint="@color/chip_bg"
-                app:strokeColor="@color/chip_stroke"
-                app:strokeWidth="1dp"
-                app:cornerRadius="16dp" />
+                app:backgroundTint="@color/surface_light_green"
+                app:cornerRadius="16dp"
+                app:strokeColor="@color/border_light_green"
+                app:strokeWidth="1dp" />
 
             <!-- Profile Avatar Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_top_profile"
                 style="@style/Widget.Material3.Button.TonalButton"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
-                android:padding="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
+                android:contentDescription="Open Profile"
                 android:insetLeft="0dp"
+                android:insetTop="0dp"
                 android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                app:backgroundTint="@color/surface_light_green"
+                app:cornerRadius="20dp"
                 app:icon="@drawable/ic_person"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
                 app:iconSize="20dp"
-                app:iconTint="@color/text_primary"
-                app:backgroundTint="@color/chip_bg"
-                app:strokeColor="@color/chip_stroke"
-                app:strokeWidth="1dp"
-                app:cornerRadius="21dp"
-                android:contentDescription="Open Profile" />
+                app:iconTint="@color/primary_dark_green"
+                app:strokeColor="@color/border_light_green"
+                app:strokeWidth="1dp" />
 
         </LinearLayout>
 
-        <!-- Subtle Top Border Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/divider_color" />
+            android:background="@color/border_light_green" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- Main Fragment Content Area -->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="76dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="match_parent" />
 
-    <!-- Persistent Floating Voice Action Mic FAB -->
+    <!-- Glowing Circular Voice Button "Tap to speak" (Matching Reference Image 8) -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_voice_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="92dp"
-        android:text="@string/btn_voice_action"
-        android:textColor="@color/on_primary"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="82dp"
+        android:backgroundTint="@color/primary_dark_green"
+        android:elevation="6dp"
+        android:text="@string/tap_to_speak"
+        android:textColor="@color/white"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:icon="@drawable/ic_mic"
-        app:iconTint="@color/on_primary"
-        android:backgroundTint="@color/brand_blue"
-        app:elevation="4dp" />
+        app:iconTint="@color/white"
+        app:strokeColor="@color/border_light_green"
+        app:strokeWidth="2dp" />
 
-    <!-- Bottom Navigation Bar with Top Border -->
+    <!-- Bottom Navigation Bar Container -->
     <LinearLayout
+        android:id="@+id/bottom_nav_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -133,18 +141,18 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/divider_color" />
+            android:background="@color/border_light_green" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="72dp"
-            android:background="@color/surface_card"
+            android:background="@color/canvas_white"
             app:elevation="0dp"
-            app:menu="@menu/bottom_nav_menu"
-            app:itemTextColor="@color/nav_item_colors"
+            app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
             app:itemIconTint="@color/nav_item_colors"
-            app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator" />
+            app:itemTextColor="@color/nav_item_colors"
+            app:menu="@menu/bottom_nav_menu" />
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

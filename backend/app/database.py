@@ -60,6 +60,24 @@ async def init_db():
     # Create tables
     async with active_engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+
+        # Ensure newly added onboarding columns exist in users table
+        from sqlalchemy import text
+        for col, col_def in [
+            ("phone", "TEXT"),
+            ("pan", "TEXT"),
+            ("job_type", "TEXT DEFAULT 'Salaried Job'"),
+            ("income_frequency", "TEXT DEFAULT 'Monthly'"),
+            ("typical_income", "REAL DEFAULT 25000.0"),
+            ("mandatory_expenses", "REAL DEFAULT 16800.0"),
+            ("desired_savings", "REAL DEFAULT 3000.0"),
+            ("desired_investment", "REAL DEFAULT 2000.0"),
+        ]:
+            try:
+                await conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} {col_def}"))
+            except Exception:
+                pass  # column already exists
+
         logger.info(f"Database schema initialized on {'PostgreSQL' if active_engine == postgres_engine else 'SQLite'}.")
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:

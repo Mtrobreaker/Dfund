@@ -4,217 +4,245 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import com.dfund.app.DFundApplication;
+
 import com.dfund.app.R;
+import com.dfund.app.data.local.TransactionEntity;
+import com.dfund.app.data.security.SecurityManager;
 import com.dfund.app.ui.viewmodels.MainViewModel;
 import com.dfund.app.ui.voice.VoiceActiveDialogFragment;
 import com.dfund.app.ui.voice.VoiceInteractionManager;
+
+import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 
 public class DashboardFragment extends Fragment {
+
     private MainViewModel viewModel;
-    private TextView tvTotalIncome;
-    private TextView tvTotalSpent;
-    private TextView tvSafetyShieldAmount;
-    private TextView tvUpcomingEmiAmount;
-    private TextView tvUpcomingEmiDesc;
-    private TextView tvGrowthPotAmount;
-    private TextView tvSurplusHint;
-    private TextView tvAiSuggestion;
-    private double currentSurplus = 0.0;
+    private SecurityManager securityManager;
     private VoiceInteractionManager voiceManager;
+
+    private TextView tvTotalSpent, tvSpendingLimit, tvSpendingPercent;
+    private TextView tvRemainingLimit, tvSavedMonth;
+    private ProgressBar progressSpending;
+    private TextView tvAiSuggestion;
+    private LinearLayout layoutRecentTransactions;
     private String currentAiAdviceText = "";
+
+    private final NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
-        tvTotalIncome = view.findViewById(R.id.tv_total_income);
-        tvTotalSpent = view.findViewById(R.id.tv_total_spent);
-        tvSafetyShieldAmount = view.findViewById(R.id.tv_safety_shield_amount);
-        tvUpcomingEmiAmount = view.findViewById(R.id.tv_upcoming_emi_amount);
-        tvUpcomingEmiDesc = view.findViewById(R.id.tv_upcoming_emi_desc);
-        tvGrowthPotAmount = view.findViewById(R.id.tv_growth_pot_amount);
-        tvSurplusHint = view.findViewById(R.id.tv_surplus_hint);
-        tvAiSuggestion = view.findViewById(R.id.tv_dashboard_ai_suggestion);
-
-        if (getContext() != null) {
-            voiceManager = new VoiceInteractionManager(getContext());
-        }
-
-        view.findViewById(R.id.btn_dashboard_listen_ai).setOnClickListener(v -> {
-            if (voiceManager != null && !currentAiAdviceText.isEmpty()) {
-                voiceManager.speak(currentAiAdviceText);
-                Toast.makeText(getContext(), "🔊 Speaking financial advice...", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        view.findViewById(R.id.btn_dashboard_ask_ai).setOnClickListener(v -> {
-            if (getActivity() != null) {
-                VoiceActiveDialogFragment dialog = VoiceActiveDialogFragment.newInstance();
-                dialog.setVoiceInteractionManager(voiceManager);
-                dialog.show(getActivity().getSupportFragmentManager(), "VOICE_DIALOG");
-            }
-        });
-
-        view.findViewById(R.id.btn_explore_growth).setOnClickListener(v -> {
-            double initialAmt = currentSurplus > 0 ? Math.min(currentSurplus, 2000.0) : 500.0;
-            if (getActivity() != null) {
-                getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, SipCalculatorFragment.newInstance(initialAmt, 3))
-                    .addToBackStack(null)
-                    .commit();
-            }
-        });
-
-        view.findViewById(R.id.btn_scan_sms).setOnClickListener(v -> {
-            if (getContext() != null) {
-                Toast.makeText(getContext(), "Scanning SMS messages...", Toast.LENGTH_SHORT).show();
-                com.dfund.app.data.sms.SmsInboxScanner.scanInbox(getContext(), 100, count -> {
-                    if (getActivity() != null) {
-                        getActivity().runOnUiThread(() -> {
-                            if (count > 0) {
-                                Toast.makeText(getContext(), "Found & imported " + count + " new UPI transactions!", Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(getContext(), "SMS up-to-date! No new transactions found.", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
-                });
-            }
-        });
-
-        view.findViewById(R.id.btn_load_mock_data).setOnClickListener(v -> {
-            if (viewModel != null) {
-                viewModel.loadSampleData();
-                Toast.makeText(getContext(), R.string.sample_data_loaded, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        return view;
+        return inflater.inflate(R.layout.fragment_dashboard, container, false);
     }
-
-    private double latestIncome = 0.0;
-    private double latestExpenses = 0.0;
-    private double latestEmi = 0.0;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        securityManager = new SecurityManager(requireContext());
+        voiceManager = new VoiceInteractionManager(requireContext());
+        currencyFormatter.setMaximumFractionDigits(0);
+
+        tvTotalSpent = view.findViewById(R.id.tv_total_spent);
+        tvSpendingLimit = view.findViewById(R.id.tv_spending_limit);
+        tvSpendingPercent = view.findViewById(R.id.tv_spending_percent);
+        tvRemainingLimit = view.findViewById(R.id.tv_remaining_limit);
+        tvSavedMonth = view.findViewById(R.id.tv_saved_month);
+        progressSpending = view.findViewById(R.id.progressSpending);
+        tvAiSuggestion = view.findViewById(R.id.tv_dashboard_ai_suggestion);
+        layoutRecentTransactions = view.findViewById(R.id.layoutRecentTransactions);
+
+        // Top Header Actions
+        view.findViewById(R.id.btnAvatarProfile).setOnClickListener(v -> {
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).navigateToProfile();
+            }
+        });
+
+        view.findViewById(R.id.btnNotification).setOnClickListener(v ->
+                Toast.makeText(getContext(), "🔔 No urgent financial alerts. You're in safe limits!", Toast.LENGTH_SHORT).show()
+        );
+
+        // Quick Actions
+        view.findViewById(R.id.btnQuickAddIncome).setOnClickListener(v -> showAddTransactionDialog(true));
+        view.findViewById(R.id.btnQuickAddExpense).setOnClickListener(v -> showAddTransactionDialog(false));
+
+        view.findViewById(R.id.btnQuickEmergency).setOnClickListener(v -> {
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, SipCalculatorFragment.newInstance(1000.0, 1))
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss();
+        });
+
+        view.findViewById(R.id.btnQuickSaveInvest).setOnClickListener(v -> {
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, SipCalculatorFragment.newInstance(2000.0, 3))
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss();
+        });
+
+        view.findViewById(R.id.cardPromoBanner).setOnClickListener(v -> {
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, SipCalculatorFragment.newInstance(1500.0, 3))
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss();
+        });
+
+        view.findViewById(R.id.btnSeeAllTransactions).setOnClickListener(v -> {
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, TransactionsFragment.newInstance(null))
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss();
+        });
+
+        // AI Advisor buttons
+        view.findViewById(R.id.btn_dashboard_listen_ai).setOnClickListener(v -> {
+            if (!currentAiAdviceText.isEmpty()) {
+                voiceManager.speak(currentAiAdviceText);
+                Toast.makeText(getContext(), "🔊 Speaking DFund advice...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        view.findViewById(R.id.btn_dashboard_ask_ai).setOnClickListener(v -> {
+            VoiceActiveDialogFragment dialog = VoiceActiveDialogFragment.newInstance();
+            dialog.setVoiceInteractionManager(voiceManager);
+            dialog.show(getParentFragmentManager(), "VOICE_DIALOG");
+        });
+
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         viewModel.autoInitializeDataIfEmpty();
 
-        viewModel.getTotalIncome().observe(getViewLifecycleOwner(), income -> {
-            latestIncome = income != null ? income : 0.0;
-            tvTotalIncome.setText(String.format(Locale.getDefault(), "₹%.2f", latestIncome));
-            recomputeBuckets();
-        });
-
-        viewModel.getTotalExpenses().observe(getViewLifecycleOwner(), spent -> {
-            latestExpenses = spent != null ? spent : 0.0;
-            tvTotalSpent.setText(String.format(Locale.getDefault(), "₹%.2f", latestExpenses));
-            recomputeBuckets();
-        });
-
-        viewModel.getTotalEmi().observe(getViewLifecycleOwner(), emi -> {
-            latestEmi = emi != null ? emi : 0.0;
-            tvUpcomingEmiAmount.setText(String.format(Locale.getDefault(), "₹%.2f", latestEmi));
-            if (latestEmi > 0) {
-                tvUpcomingEmiDesc.setText(R.string.bucket_dues_desc);
-            } else {
-                tvUpcomingEmiDesc.setText(R.string.label_no_emis);
-            }
-            recomputeBuckets();
-        });
+        observeFinancialData();
     }
 
-    private void recomputeBuckets() {
-        double netBalance = Math.max(0.0, latestIncome - latestExpenses);
-        
-        // 1. Safety Shield: Emergency cushion for irregular income
-        double safetyShield = netBalance > 0 ? Math.min(netBalance * 0.5, 3000.0) : 0.0;
-        
-        // 2. Growth Pot: Extra small surplus ready to grow
-        currentSurplus = Math.max(0.0, netBalance - safetyShield);
+    private void observeFinancialData() {
+        double income = securityManager.getTypicalIncome();
+        if (income <= 0) income = 25000;
 
-        if (tvSafetyShieldAmount != null) {
-            tvSafetyShieldAmount.setText(String.format(Locale.getDefault(), "₹%.2f", safetyShield));
-        }
-        if (tvGrowthPotAmount != null) {
-            tvGrowthPotAmount.setText(String.format(Locale.getDefault(), "₹%.2f", currentSurplus));
-        }
+        double limit = income * 0.85; // 85% maximum safe spending limit
+        tvSpendingLimit.setText("of " + currencyFormatter.format(limit) + " limit");
 
-        if (tvSurplusHint != null) {
-            if (currentSurplus > 0) {
-                tvSurplusHint.setText(String.format(getString(R.string.surplus_detected_msg), String.format(Locale.getDefault(), "%.0f", currentSurplus)));
-            } else {
-                tvSurplusHint.setText(R.string.bucket_growth_desc);
-            }
-        }
+        final double finalLimit = limit;
+        final double finalIncome = income;
 
-        // 3. Update Ollama Minimax-M3 Advisor recommendation
-        String lang = DFundApplication.getInstance() != null 
-            ? DFundApplication.getInstance().getSecurityManager().getLanguage() 
-            : "en";
+        viewModel.getTotalExpenses().observe(getViewLifecycleOwner(), expenses -> {
+            double spent = expenses != null ? expenses : 16800.0;
+            tvTotalSpent.setText(currencyFormatter.format(spent));
 
-        if ("ta".equals(lang)) {
-            if (currentSurplus > 0) {
-                currentAiAdviceText = String.format(Locale.getDefault(), 
-                    "உங்களிடம் ₹%.0f உபரி உள்ளது! மாதம் ₹500 மைக்ரோ-SIP-ல் முதலீடு செய்தால் 3 ஆண்டுகளில் ₹22,000க்கு மேல் வளர்ச்சி பெறலாம்.", 
-                    currentSurplus);
-            } else if (latestEmi > 0) {
-                currentAiAdviceText = String.format(Locale.getDefault(), 
-                    "உங்கள் வரவிருக்கும் EMI தவணைகள் ₹%.0f. அபராதங்களைத் தவிர்க்க பாதுகாப்பு நிதியை தயாராக வையுங்கள்.", 
-                    latestEmi);
-            } else {
-                currentAiAdviceText = "உங்கள் வருமானம் மற்றும் செலவுகள் சீராக கண்காணிக்கப்படுகின்றன. தொடர்ந்து சேமியுங்கள்!";
-            }
-        } else if ("te".equals(lang)) {
-            if (currentSurplus > 0) {
-                currentAiAdviceText = String.format(Locale.getDefault(), 
-                    "మీ వద్ద ₹%.0f మిగులు ఉంది! మైక్రో-SIP లో పెట్టుబడి పెట్టడం ద్వారా మంచి లాభం పొందవచ్చు.", 
-                    currentSurplus);
-            } else {
-                currentAiAdviceText = "మీ ఖర్చులు క్రమబద్ధంగా ఉన్నాయి. పొదుపును కొనసాగించండి!";
-            }
-        } else if ("ml".equals(lang)) {
-            if (currentSurplus > 0) {
-                currentAiAdviceText = String.format(Locale.getDefault(), 
-                    "നിങ്ങൾക്ക് ₹%.0f മിച്ചമുണ്ട്! മൈക്രോ-SIP-ൽ നിക്ഷേപിക്കുന്നത് മികച്ച വളർച്ച നൽകും.", 
-                    currentSurplus);
-            } else {
-                currentAiAdviceText = "നിങ്ങളുടെ ചെലവുകൾ കൃത്യമായി ട്രാക്ക് ചെയ്യുന്നു!";
-            }
-        } else {
-            if (currentSurplus > 0) {
-                currentAiAdviceText = String.format(Locale.getDefault(), 
-                    "You have ₹%.0f surplus! Investing ₹500/mo in a Micro-SIP can compound to over ₹22,000 in 3 years with 12%% returns.", 
-                    currentSurplus);
-            } else if (latestEmi > 0) {
-                currentAiAdviceText = String.format(Locale.getDefault(), 
-                    "You have ₹%.0f in upcoming EMIs. Keep your safety buffer ready to avoid late fees.", 
-                    latestEmi);
-            } else {
-                currentAiAdviceText = "Your cashflow is balanced. Track your daily expenses and build your safety shield.";
-            }
-        }
+            int pct = (int) Math.min(100, Math.round((spent / finalLimit) * 100));
+            progressSpending.setProgress(pct);
+            tvSpendingPercent.setText(pct + "% used");
 
-        if (tvAiSuggestion != null) {
+            double remaining = Math.max(0, finalLimit - spent);
+            tvRemainingLimit.setText(currencyFormatter.format(remaining) + " left");
+
+            double saved = Math.max(0, finalIncome - spent);
+            tvSavedMonth.setText(currencyFormatter.format(saved));
+
+            currentAiAdviceText = String.format(Locale.getDefault(),
+                    "You have spent %s this month, which is %d percent of your monthly limit. You still have %s safe to spend.",
+                    currencyFormatter.format(spent), pct, currencyFormatter.format(remaining));
             tvAiSuggestion.setText(currentAiAdviceText);
+        });
+
+        viewModel.getAllTransactions().observe(getViewLifecycleOwner(), this::renderRecentTransactions);
+    }
+
+    private void renderRecentTransactions(List<TransactionEntity> transactions) {
+        if (layoutRecentTransactions == null) return;
+        layoutRecentTransactions.removeAllViews();
+
+        if (transactions == null || transactions.isEmpty()) {
+            TextView emptyTv = new TextView(getContext());
+            emptyTv.setText("No recent transactions found.");
+            emptyTv.setTextColor(getResources().getColor(R.color.text_muted));
+            layoutRecentTransactions.addView(emptyTv);
+            return;
         }
+
+        int count = Math.min(4, transactions.size());
+        for (int i = 0; i < count; i++) {
+            TransactionEntity tx = transactions.get(i);
+            View itemView = LayoutInflater.from(getContext()).inflate(R.layout.item_transaction, layoutRecentTransactions, false);
+
+            TextView tvCategory = itemView.findViewById(R.id.tv_category_tag);
+            TextView tvBank = itemView.findViewById(R.id.tv_bank_name);
+            TextView tvAmount = itemView.findViewById(R.id.tv_amount);
+            TextView tvDate = itemView.findViewById(R.id.tv_date);
+            TextView tvDetails = itemView.findViewById(R.id.tv_details);
+
+            if (tvCategory != null) {
+                String cat = tx.getCategory() != null ? tx.getCategory().toUpperCase() : "GENERAL";
+                tvCategory.setText(cat);
+            }
+            if (tvBank != null) {
+                tvBank.setText(tx.getDescription());
+            }
+            if (tvDetails != null) {
+                tvDetails.setText(tx.getMerchant());
+            }
+            if (tvDate != null) {
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd MMM, hh:mm a", java.util.Locale.getDefault());
+                tvDate.setText(sdf.format(new java.util.Date(tx.getTimestamp() > 0 ? tx.getTimestamp() : System.currentTimeMillis())));
+            }
+
+            if (tvAmount != null) {
+                boolean isCredit = tx.isCredit();
+                tvAmount.setText((isCredit ? "+ " : "- ") + currencyFormatter.format(tx.getAmount()));
+                tvAmount.setTextColor(getResources().getColor(isCredit ? R.color.growth_green : R.color.text_dark));
+            }
+
+            layoutRecentTransactions.addView(itemView);
+        }
+    }
+
+    private void showAddTransactionDialog(boolean isIncome) {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(requireContext());
+        builder.setTitle(isIncome ? "Add Income" : "Add Expense");
+
+        LinearLayout layout = new LinearLayout(getContext());
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(48, 24, 48, 24);
+
+        final android.widget.EditText etDesc = new android.widget.EditText(getContext());
+        etDesc.setHint(isIncome ? "Income source (e.g. Salary, Client)" : "Expense name (e.g. Groceries)");
+        layout.addView(etDesc);
+
+        final android.widget.EditText etAmt = new android.widget.EditText(getContext());
+        etAmt.setHint("Amount in ₹");
+        etAmt.setInputType(android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        layout.addView(etAmt);
+
+        builder.setView(layout);
+        builder.setPositiveButton("Add", (dialog, which) -> {
+            String desc = etDesc.getText().toString().trim();
+            String amtStr = etAmt.getText().toString().trim();
+            if (!amtStr.isEmpty()) {
+                try {
+                    double amt = Double.parseDouble(amtStr);
+                    if (desc.isEmpty()) desc = isIncome ? "Direct Income" : "Quick Expense";
+                    viewModel.addManualTransaction(desc, amt, isIncome ? "Income" : "Expense", isIncome);
+                    Toast.makeText(getContext(), "Transaction recorded!", Toast.LENGTH_SHORT).show();
+                } catch (NumberFormatException ignored) {}
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (voiceManager != null) {
             voiceManager.destroy();
         }

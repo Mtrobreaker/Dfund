@@ -1,6 +1,11 @@
 import pytest
 from httpx import AsyncClient, ASGITransport
+import asyncio
+from app.database import init_db
 from app.main import app
+
+# Ensure database schema and migrations are applied before running tests
+asyncio.run(init_db())
 
 @pytest.mark.asyncio
 async def test_health_check():

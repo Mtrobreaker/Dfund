@@ -1,0 +1,34 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Outer 'D' shape in Dark Green -->
+    <!-- Left vertical stem and outer right loop of letter D -->
+    <path
+        android:fillColor="@color/heading_dark_green"
+        android:pathData="M12,8 L24,8 C33,8 38,13 38,24 C38,35 33,40 24,40 L12,40 Z M18,14 L18,34 L24,34 C30,34 32,30 32,24 C32,18 30,14 24,14 Z" />
+
+    <!-- Internal Upward Financial Growth Bars (Rising from left to right) -->
+    <!-- Bar 1: Shortest -->
+    <path
+        android:fillColor="@color/growth_emerald"
+        android:pathData="M19,30 L21,30 C21.5,30 22,30.5 22,31 L22,34 L18,34 L18,31 C18,30.5 18.5,30 19,30 Z" />
+
+    <!-- Bar 2: Medium-low -->
+    <path
+        android:fillColor="@color/growth_emerald"
+        android:pathData="M22,26 L24,26 C24.5,26 25,26.5 25,27 L25,34 L21,34 L21,27 C21,26.5 21.5,26 22,26 Z" />
+
+    <!-- Bar 3: Medium-tall -->
+    <path
+        android:fillColor="@color/growth_emerald"
+        android:pathData="M25,21 L27,21 C27.5,21 28,21.5 28,22 L28,34 L24,34 L24,22 C24,21.5 24.5,21 25,21 Z" />
+
+    <!-- Bar 4: Tallest -->
+    <path
+        android:fillColor="@color/growth_emerald"
+        android:pathData="M28,15 L30,15 C30.5,15 31,15.5 31,16 L31,34 L27,34 L27,16 C27,15.5 27.5,15 28,15 Z" />
+
+</vector>

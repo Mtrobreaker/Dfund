@@ -126,27 +126,39 @@ d:/Dfund/
   - Completely bypassed Ollama to run an all-in-one native Indian AI stack.
   - Verified live: Spoken query translated to Tamil -> analyzed by `sarvam-105b-conversations` -> produced explicit what was done + exact numerical results -> dispatched in-app action payload -> synthesized Bulbul v3 neural voice speech.
 
-- [x] **Milestone 17**: User Profile & Session Management / Logout:
-  - Added dedicated **Profile** screen accessible via both a 4th tab in bottom navigation (`Profile`) and the top app bar avatar button (`btn_top_profile`).
-  - Implemented Apple Wallet / Toss-style fintech card layout:
-    - User Header Card: Circular avatar, editable user name dialog, dynamic device ID, bank-grade AES-256 encryption status pill.
-    - Emergency Safety Cushion Card: Real-time adjustable buffer amount with `+` and `-` increments.
-    - Investment Risk Appetite: Interactive chip selection (Conservative, Balanced/Moderate, Aggressive Growth).
-    - Preferences & Security Card: Dark/Light theme toggle switch, Biometric App Lock toggle, App Language selector (English, Tamil, Telugu, Malayalam), and Automated SMS Tracking status.
-    - Account Session Card: Styled red card with exit icon button `Log Out`.
-  - Added Material 3 confirmation dialog for logout (`Log Out of DFund`) with Cancel and Log Out actions.
-  - Safe Session Reset: `SecurityManager.logout()` clears local session keys, generates a fresh anonymous device ID, preserves user theme and language settings, shows a confirmation Toast, and navigates cleanly back to the Dashboard with synchronized bottom navigation.
-  - Backend API: Added `GET /api/users/profile`, `PUT /api/users/profile`, and `POST /api/users/logout` with Pydantic schemas and full pytest coverage.
-  - Autonomous Voice Navigation: Added `ACTION_OPEN_PROFILE` and `ACTION_LOGOUT` intents to Sarvam 105B LLM prompt, fallback rules, and Android `AiActionNavigator` / `LocalAiIntentParser`.
+- [x] **Milestone 18**: High-Fidelity UI Match (8 Reference Images), 7-Step Onboarding & Complete Clean Architecture:
+  - **Pixel-Perfect Alignment with Reference UI Images**:
+    - Re-architected app navigation into a 3-tab Core shell: **Home** (matching Reference Image 8), **Savings** (matching Reference Image 7), and **Profile** (Fintech Card UI with Log Out).
+    - **Home / Dashboard**: Pine Green theme (#0A4D3C), Mint Card (#F4FBF7 / #D1FAE5) with real-time Spending vs Limit ratio (e.g. 18% used), 2x2 Quick Actions grid (Add Income, Add Expense, Emergency Fund, Save & Invest), motivational savings banner ("Small steps, big change!"), live Sarvam 105B AI Advisor with audio TTS playback, and Floating Voice FAB ("Tap to speak").
+    - **Savings & Investments**: Total Saved hero card with monthly/previous comparison pills, Target Savings progress bar, dynamic potential monthly savings breakdown ("Your income is ₹X, essentials total ₹Y, after buffer ₹Z, you have ₹W for savings"), 3-Way Cashflow buckets (Essentials, Spending, Surplus/SIP), and active investment cards (Index Nifty 50 SIP, Bank Recurring Deposit).
+  - **Comprehensive 7-Step Onboarding Flow**:
+    1. **Language Selection** (Step 1): English, Hindi, Tamil, Telugu with native script headers and dynamic locale activation.
+    2. **Authentication** (Step 2 - Image 2): 10-digit Phone Number, optional PAN card for tax saving/KYC, OTP verification mock, bank-grade encryption badge.
+    3. **Automated SMS Permission** (Step 3 - Image 3): Transparent privacy explanation ("We only read bank transaction SMS alerts; we NEVER read personal texts or OTPs").
+    4. **Work & Income Profile** (Step 4 - Image 4): Multi-selection of work types (Gig Worker, Salaried, Daily Wage, Self-Employed, Homemaker, Other) with dynamic monthly income slider and volatility indicator.
+    5. **Mandatory Monthly Expenses** (Step 5 - Image 5): Interactive expense cards (Rent, Groceries/Food, Loan EMI, Utilities/Bills, Transport, Other) with instant sum calculation and income vs expense sanity guard.
+    6. **Savings Preferences & Goals** (Step 6 - Image 6): Priority selection (Emergency Fund, Safe Fixed Deposit, Mutual Fund SIP, Child Education, Medical Cushion) and target monthly savings percentage slider.
+    7. **Personalized Money Plan** (Step 7): AI-generated plan calculating Safe Daily Limit, Volatility Cushion, and Surplus Pot with 1-tap "Go to Dashboard" transition.
+  - **Full Security & Session Logout**:
+    - Profile screen equipped with user session management, live cushion adjusters (+/-), risk appetite chip selector, theme toggle, and styled destructive red "Log Out" card.
+    - Logout confirmation dialog clears session keys and resets onboarding state, safely returning to Step 1 without app restarts.
+  - **Sarvam 105B AI Suite Integration**:
+    - Direct calls to `sarvam-105b` / `sarvam-105b-conversations` for financial advice and action routing.
+    - `saaras:v4` STT for 23 Indian regional languages.
+    - `mayura:v1` translation for high-fidelity regional language conversions.
+    - `bulbul:v3` 48 kHz neural TTS for voice playback.
+  - **Zero Overlap UI Geometry**:
+    - Applied `clipToPadding="false"` and `paddingBottom="160dp"` with trailing spacers on all scrollable screens, ensuring all interactive buttons and cards scroll completely clear of the floating voice mic and bottom navigation bar.
 
 ---
 
 ## 7. Current Status
-- **Phase**: Milestone 17 Complete — User Profile, Security Settings, and Secure Session Logout fully implemented and verified on live mobile device.
-- **APK Location**: `d:\Dfund\DFund-app-debug.apk` in root folder and `d:\Dfund\android\app\build\outputs\apk\debug\app-debug.apk`.
-- **Backend Status**: Online at `http://0.0.0.0:8000` with User Profile endpoints and Sarvam 105B AI integration.
-- **Device Status**: Live physical device (`00093347I000307`) connected, updated APK installed, reverse port forwarding enabled.
+- **Phase**: Milestone 18 Complete — Full 7-Step Onboarding, 3-Tab High-Fidelity UI Match, Profile & Secure Logout, and Sarvam 105B AI Suite fully verified on Android 15 emulator and physical device.
+- **APK Location**: `d:\Dfund\DFund-app-debug.apk` in project root and `d:\Dfund\android\app\build\outputs\apk\debug\app-debug.apk`.
+- **Backend Status**: Online at `http://0.0.0.0:8000` with Sarvam 105B AI integration, profile endpoints, and health monitoring.
+- **Testing & Verification**: 100% verified across all 7 onboarding steps, Dashboard, Savings/Investments, Profile editing, and Logout cycle.
 - **Memory**: Graphify Knowledge Graph synchronized.
+
 
 
 

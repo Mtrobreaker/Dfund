@@ -21,6 +21,7 @@ public class TransactionEntity {
     public TransactionEntity() {
     }
 
+    @androidx.room.Ignore
     public TransactionEntity(String bankName, double amount, String type, String category, 
                              String vpa, String utr, String rawMessage, boolean isRecurring, 
                              boolean isEmi, long timestamp) {
@@ -69,4 +70,20 @@ public class TransactionEntity {
 
     public long getTimestamp() { return timestamp; }
     public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
+
+    public String getDescription() {
+        if (vpa != null && !vpa.isEmpty()) return vpa;
+        if (category != null && !category.isEmpty()) return category;
+        return "Transaction";
+    }
+
+    public String getMerchant() {
+        if (vpa != null && !vpa.isEmpty()) return vpa;
+        if (bankName != null && !bankName.isEmpty()) return bankName;
+        return "UPI Transfer";
+    }
+
+    public boolean isCredit() {
+        return "CREDIT".equalsIgnoreCase(type);
+    }
 }

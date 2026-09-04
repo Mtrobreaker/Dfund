@@ -37,3 +37,7 @@ dfund_dev.db
 # OS
 .DS_Store
 Thumbs.db
+
+# Test screencaps & dumps
+screen_*.png
+window_dump.xml

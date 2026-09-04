@@ -3,15 +3,11 @@
     <item
         android:id="@+id/nav_dashboard"
         android:icon="@drawable/ic_dashboard"
-        android:title="@string/nav_dashboard" />
+        android:title="@string/nav_home" />
     <item
         android:id="@+id/nav_calculator"
         android:icon="@drawable/ic_trending_up"
-        android:title="@string/nav_calculator" />
-    <item
-        android:id="@+id/nav_transactions"
-        android:icon="@drawable/ic_receipt"
-        android:title="@string/nav_transactions" />
+        android:title="@string/nav_savings" />
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_person"

@@ -4,8 +4,8 @@
     "description": "AI-Powered Automated Personal Finance & Financial Awareness Android Application designed for ordinary people, gig workers, irregular income earners, and parents.",
     "version": "0.1.0",
     "created_at": "2026-09-03T17:49:00+05:30",
-    "updated_at": "2026-09-03T22:23:00+05:30",
-    "status": "deployed_to_device"
+    "updated_at": "2026-09-04T15:45:00+05:30",
+    "status": "pixel_match_onboarding_verified"
   },
   "nodes": [
     {
@@ -55,6 +55,18 @@
       "type": "architecture",
       "label": "FastAPI Backend Service",
       "details": "Python + FastAPI, PostgreSQL database, AI orchestration endpoints, auth token handling, sync."
+    },
+    {
+      "id": "node-onboarding-flow",
+      "type": "feature",
+      "label": "7-Step Financial Onboarding Engine",
+      "details": "Language selection, Phone/PAN authentication, SMS privacy explanation, Work/Income profiling, Mandatory expenses breakdown, Savings goal calibration, and Personalized financial plan generation."
+    },
+    {
+      "id": "node-3tab-core-ui",
+      "type": "architecture",
+      "label": "3-Tab Core App Shell",
+      "details": "Home (matching Image 8), Savings & Investments (matching Image 7), and Profile & Settings with bottom navigation and persistent floating voice assistant."
     }
   ],
   "relationships": [
@@ -82,6 +94,16 @@
       "from": "node-android-client",
       "to": "node-backend-service",
       "relation": "communicates_with"
+    },
+    {
+      "from": "node-onboarding-flow",
+      "to": "node-transparent-overview",
+      "relation": "initializes_user_profile"
+    },
+    {
+      "from": "node-3tab-core-ui",
+      "to": "node-android-client",
+      "relation": "implements_core_navigation"
     }
   ],
   "tasks": [
@@ -158,6 +180,11 @@
     {
       "id": "task-auto-execution",
       "title": "Autonomous Action Execution & Exact Spoken Numerical Result Announcements",
+      "status": "completed"
+    },
+    {
+      "id": "task-ui-pixel-match-onboarding",
+      "title": "Pixel-Perfect UI Match (8 Reference Screens), 7-Step Onboarding Flow & Clean Session Architecture",
       "status": "completed"
     }
   ],
@@ -236,6 +263,11 @@
       "id": "dec-profile-logout",
       "title": "Fintech Profile Screen & Secure Session Logout",
       "rationale": "Added Apple Wallet/Toss style Profile card layout accessible via bottom navigation 4th tab and top app bar avatar. Features include editable username, emergency safety cushion modifier (+/-), risk appetite chip group, dark theme toggle, biometric switch, language picker, and styled red logout card. Material 3 logout confirmation dialog performs safe session key resets while maintaining user UI preferences."
+    },
+    {
+      "id": "dec-pixel-match-onboarding",
+      "title": "Pixel-Perfect Reference Match & Strict Green/White Palette Discipline",
+      "rationale": "Directly implemented layouts matching the 8 user reference images: 7-step onboarding (Language, Phone/PAN Auth, SMS Privacy, Work & Income Slider, Mandatory Expense Cards, Savings Preferences, and Personalized Money Plan), 3-tab core app (Home matching Image 8, Savings matching Image 7, Profile & Settings), strictly reserving red for alert states and logout dialog, using pine green (#0A4D3C) and soft mint (#F4FBF7 / #D1FAE5) for trust, security, and calm fintech aesthetics."
     }
   ]
 }

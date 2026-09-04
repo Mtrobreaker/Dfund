@@ -1,0 +1,192 @@
+<resources>
+    <string name="app_name">DFund</string>
+    <string name="tagline">योजना बनाएं समझदारी से। बचत करें सरलता से।</string>
+
+    <string name="nav_home">होम</string>
+    <string name="nav_savings">बचत</string>
+    <string name="nav_profile">प्रोफ़ाइल</string>
+    <string name="nav_expenses">खर्चे</string>
+    <string name="nav_dashboard">होम</string>
+    <string name="nav_calculator">बचत</string>
+    <string name="nav_transactions">खर्चे</string>
+
+    <string name="splash_title">DFUND</string>
+    <string name="splash_tagline">योजना बनाएं समझदारी से। बचत करें सरलता से।</string>
+
+    <!-- Onboarding Step 1: Language Selection -->
+    <string name="onboarding_lang_title">अपनी भाषा चुनें</string>
+    <string name="onboarding_lang_subtitle">आगे बढ़ने के लिए अपनी पसंदीदा भाषा चुनें</string>
+    <string name="lang_english">English</string>
+    <string name="lang_hindi">हिंदी</string>
+    <string name="lang_tamil">தமிழ்</string>
+    <string name="lang_telugu">తెలుగు</string>
+    <string name="lang_malayalam">മലയാളം</string>
+    <string name="voice_nav_title">आवाज़ से नेविगेशन</string>
+    <string name="voice_nav_subtitle">ऐप में बोलकर मार्गदर्शन सक्षम करें</string>
+    <string name="btn_continue">आगे बढ़ें →</string>
+
+    <!-- Step 2: Auth -->
+    <string name="auth_welcome_back">वापसी पर स्वागत है</string>
+    <string name="auth_enter_details">जारी रखने के लिए अपना विवरण दर्ज करें</string>
+    <string name="auth_phone_hint">मोबाइल नंबर दर्ज करें</string>
+    <string name="auth_pan_hint">पैन कार्ड नंबर दर्ज करें</string>
+    <string name="auth_optional">वैकल्पिक</string>
+
+    <!-- Step 3: SMS Access -->
+    <string name="sms_intro_title">अपने पैसों को समझने में हमारी मदद करें</string>
+    <string name="sms_intro_subtitle">आपकी अनुमति से, DFund आय, खर्च और भुगतानों को व्यवस्थित करने के लिए लेन-देन संदेशों का उपयोग कर सकता है।</string>
+    <string name="sms_benefit_1">प्राप्त आय को समझें</string>
+    <string name="sms_benefit_2">खर्च और आवर्ती भुगतानों को व्यवस्थित करें</string>
+    <string name="sms_benefit_3">एक स्पष्ट वित्तीय तस्वीर बनाएं</string>
+    <string name="sms_privacy_note">आपकी वित्तीय जानकारी का उपयोग केवल आपकी व्यक्तिगत जानकारी देने के लिए किया जाता है। आप इस अनुमति को नियंत्रित कर सकते हैं।</string>
+    <string name="btn_allow_sms">SMS अनुमति दें</string>
+    <string name="btn_not_now">अभी नहीं</string>
+
+    <!-- Step 4: Job & Work -->
+    <string name="work_income_title">अपने काम और आय के बारे में बताएं</string>
+    <string name="work_income_subtitle">यह हमें आपके लिए सही योजना बनाने में मदद करता है।</string>
+    <string name="work_q1">1. आपका काम या पेशा क्या है?</string>
+    <string name="job_salaried">वेतनभोगी नौकरी</string>
+    <string name="job_business">स्वरोजगार / व्यवसाय</string>
+    <string name="job_daily">दिहाड़ी मजदूर</string>
+    <string name="job_gig">गिग / अंशकालिक काम</string>
+    <string name="job_homemaker">गृहिणी</string>
+    <string name="job_other">अन्य</string>
+    <string name="work_q2">2. आपको आय कितनी बार मिलती है?</string>
+    <string name="freq_monthly">मासिक</string>
+    <string name="freq_weekly">साप्ताहिक</string>
+    <string name="freq_daily">दैनिक</string>
+    <string name="freq_varies">बदलता रहता है</string>
+    <string name="work_q3_monthly">3. आपकी औसत मासिक आय क्या है?</string>
+    <string name="work_q3_weekly">3. आप आम तौर पर एक हफ्ते में कितना कमाते हैं?</string>
+    <string name="work_q3_daily">3. आप काम के एक दिन में कितना कमाते हैं?</string>
+    <string name="work_q3_varies">3. आपकी सामान्य आय क्या है?</string>
+    <string name="work_income_hint">कटौती के बाद अपनी कुल आय दर्ज करें।</string>
+    <string name="note_change_later">आप इसे बाद में बदल सकते हैं</string>
+
+    <!-- Step 5: Mandatory Expenses -->
+    <string name="expenses_mandatory_title">आपके अनिवार्य मासिक खर्चे</string>
+    <string name="expenses_mandatory_subtitle">केवल आवश्यक खर्चे दर्ज करें जो आपको हर महीने चुकाने होते हैं।</string>
+    <string name="expenses_info_banner">यह हमें आपकी आवश्यक जरूरतों की गणना करने और आपके बजट की योजना बनाने में मदद करता है।</string>
+    <string name="cat_rent">किराया / होम लोन (EMI)</string>
+    <string name="cat_food">भोजन / राशन</string>
+    <string name="cat_transport">यातायात</string>
+    <string name="cat_utilities">बिजली, पानी व बिल</string>
+    <string name="cat_loan">लोन / EMI भुगतान</string>
+    <string name="cat_others">अन्य आवश्यक खर्चे</string>
+    <string name="cat_others_desc">कोई अन्य आवश्यक खर्च</string>
+    <string name="note_update_later">आप इसे बाद में अपडेट कर सकते हैं</string>
+
+    <!-- Step 6: Savings -->
+    <string name="savings_pref_title">आइए बचत और निवेश की योजना बनाएं</string>
+    <string name="savings_pref_subtitle">नियमित रूप से बचाई गई छोटी राशि भी बड़ा बदलाव ला सकती है।</string>
+    <string name="savings_banner_msg">छोटी शुरुआत करें। लगातार बने रहें। हम आपकी वृद्धि में मदद करेंगे।</string>
+    <string name="savings_q1">1. आप हर महीने कितना बचाना चाहते हैं?</string>
+    <string name="savings_q1_sub">एक आरामदायक राशि तय करें जिसे आप नियमित रूप से बचा सकें।</string>
+    <string name="savings_q1_hint">रोजाना ₹50 भी बड़ा अंतर ला सकते हैं।</string>
+    <string name="savings_q2">2. आप हर महीने कितना निवेश करना चाहते हैं?</string>
+    <string name="savings_q2_sub">छोटा निवेश करें, भविष्य संवारें।</string>
+    <string name="savings_q2_hint">हम आपके लिए सरल और सुरक्षित विकल्प सुझाएंगे।</string>
+    <string name="savings_not_ready">मैं अभी निवेश के लिए तैयार नहीं हूं</string>
+
+    <!-- Priority & Plan -->
+    <string name="priority_title">अभी आपके लिए सबसे महत्वपूर्ण क्या है?</string>
+    <string name="priority_1">दैनिक खर्चे संभालना</string>
+    <string name="priority_2">आपातकालीन बचत बनाना</string>
+    <string name="priority_3">कर्ज / EMI कम करना</string>
+    <string name="priority_4">भविष्य के लिए बचत</string>
+    <string name="priority_5">परिवार की सुरक्षा</string>
+    <string name="priority_6">निवेश शुरू करना</string>
+    <string name="priority_7">निवेश समझना</string>
+
+    <string name="plan_title">आपकी सरल वित्तीय योजना</string>
+    <string name="plan_subtitle">आपकी आय और अनिवार्य जरूरतों के आधार पर आपकी योजना तैयार है।</string>
+    <string name="plan_essential">1. अनिवार्य खर्चों को कवर करें</string>
+    <string name="plan_emergency">2. आपातकालीन बचत बनाएं</string>
+    <string name="plan_spending">3. लचीला खर्च रखें</string>
+    <string name="plan_investment">4. निवेश पर विचार करें</string>
+    <string name="plan_buffer">5. उपलब्ध बफर</string>
+    <string name="plan_why_title">यह योजना क्यों?</string>
+    <string name="btn_go_to_dashboard">डैशबोर्ड पर जाएं →</string>
+
+    <!-- Home Screen -->
+    <string name="home_greeting">सुप्रभात, %1$s 👋</string>
+    <string name="home_greeting_sub">अपनी सीमा में रहें और अपना भविष्य बनाएं।</string>
+    <string name="home_spending_title">इस महीने का खर्च</string>
+    <string name="home_spending_limit">कुल ₹%1$s सीमा में से</string>
+    <string name="home_used_pct">%1$d%% उपयोग हुआ</string>
+    <string name="home_remaining_title">शेष सीमा</string>
+    <string name="home_left_to_spend">खर्च के लिए उपलब्ध</string>
+    <string name="home_saved_month_title">इस महीने की बचत</string>
+    <string name="home_saved_growth">पिछले महीने से +12%</string>
+
+    <string name="quick_actions_title">त्वरित कार्य</string>
+    <string name="see_all">सभी देखें ›</string>
+    <string name="action_add_income">आय जोड़ें</string>
+    <string name="action_add_income_sub">अपनी कमाई दर्ज करें</string>
+    <string name="action_add_expense">खर्च जोड़ें</string>
+    <string name="action_add_expense_sub">अपने खर्चे ट्रैक करें</string>
+    <string name="action_emergency_fund">आपातकालीन फंड</string>
+    <string name="action_emergency_fund_sub">सुरक्षा कवच बनाएं</string>
+    <string name="action_save_invest">बचत व निवेश</string>
+    <string name="action_save_invest_sub">पैसा बढ़ाएं</string>
+
+    <string name="banner_title">छोटे कदम, बड़ा बदलाव!</string>
+    <string name="banner_sub">आज थोड़ा बचाएं, कल सुरक्षित करें।</string>
+    <string name="btn_get_started">शुरू करें →</string>
+    <string name="tap_to_speak">बोलने के लिए टैप करें</string>
+
+    <!-- Savings Screen -->
+    <string name="savings_screen_title">बचत</string>
+    <string name="savings_screen_sub">देखें कि आपने कितना बचाया है, आप कितना बचा सकते हैं, और आपका पैसा कैसे बढ़ सकता है।</string>
+    <string name="savings_total_label">कुल बचत</string>
+    <string name="savings_total_sub">अब तक की आपकी कुल बचत</string>
+    <string name="savings_this_month">इस महीने</string>
+    <string name="savings_previous">पिछली बचत</string>
+    <string name="savings_month_title">इस महीने की बचत</string>
+    <string name="savings_saved_suffix">बचत हुई</string>
+    <string name="savings_target_label">लक्ष्य: ₹%1$s</string>
+    <string name="savings_remaining_label">₹%1$s बाकी</string>
+    <string name="savings_potential_title">आप संभावित रूप से बचा सकते हैं</string>
+    <string name="savings_per_month">/ महीना</string>
+    <string name="savings_potential_desc">आपकी आय और हाल के खर्चों के आधार पर, आप हर महीने लगभग ₹%1$s बचा सकते हैं।</string>
+    <string name="btn_adjust_details">विवरण बदलें</string>
+    <string name="calc_how_title">हमने इसकी गणना कैसे की?</string>
+    <string name="calc_monthly_income">मासिक आय</string>
+    <string name="calc_essential_exp">अनिवार्य खर्चे</string>
+    <string name="calc_emi_commitments">EMI / देनदारियां</string>
+    <string name="calc_other_exp">अन्य खर्चे</string>
+    <string name="calc_potential">संभावित बचत</string>
+
+    <!-- Voice Dialog -->
+    <string name="voice_dialog_title">DFund से पूछें</string>
+    <string name="voice_listening">सुन रहा हूँ… बताइए आपको क्या चाहिए</string>
+    <string name="voice_processing">अनुरोध समझ रहा हूँ…</string>
+    <string name="btn_close">बंद करें</string>
+
+    <!-- Profile & Logout -->
+    <string name="profile_title">मेरी प्रोफ़ाइल और सेटिंग्स</string>
+    <string name="profile_security_badge">बैंक-स्तरीय AES-256 एन्क्रिप्टेड</string>
+    <string name="profile_account_id">डिवाइस आईडी: %1$s</string>
+    <string name="profile_phone_label">मोबाइल: +91 %1$s</string>
+    <string name="profile_pan_label">पैन: %1$s</string>
+    <string name="profile_retake_onboarding">वित्तीय प्रोफ़ाइल देखें व बदलें</string>
+    <string name="profile_risk_title">निवेश जोखिम प्राथमिकता</string>
+    <string name="profile_risk_conservative">सुरक्षित (Conservative)</string>
+    <string name="profile_risk_moderate">संतुलित (Balanced)</string>
+    <string name="profile_risk_aggressive">विकासोन्मुख (Aggressive)</string>
+    <string name="profile_safety_cushion">आपातकालीन सुरक्षा कुशन</string>
+    <string name="profile_pref_title">प्राथमिकताएं और सुरक्षा</string>
+    <string name="profile_pref_theme">डार्क थीम</string>
+    <string name="profile_pref_lang">ऐप की भाषा</string>
+    <string name="profile_pref_biometric">बायोमेट्रिक ऐप लॉक</string>
+    <string name="profile_pref_sms">स्वचालित SMS ट्रैकिंग</string>
+    <string name="profile_status_active">सक्रिय • रीयल-टाइम</string>
+    <string name="btn_edit_name">नाम बदलें</string>
+    <string name="btn_logout">लॉग आउट</string>
+    <string name="logout_dialog_title">DFund से लॉग आउट करें</string>
+    <string name="logout_dialog_msg">क्या आप वाकई लॉग आउट करना चाहते हैं? आपका सक्रिय सत्र साफ हो जाएगा।</string>
+    <string name="logout_confirm">लॉग आउट</string>
+    <string name="logout_cancel">रद्द करें</string>
+    <string name="logout_toast">सफलतापूर्वक लॉग आउट हो गया</string>
+</resources>

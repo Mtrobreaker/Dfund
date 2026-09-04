@@ -64,6 +64,10 @@ public class FinancialMathEngine {
         return new SipResult(invested, returns, fv);
     }
 
+    public static double calculateSipMaturity(double monthlyInvestment, int tenureYears, double annualRatePercent) {
+        return calculateSip(monthlyInvestment, annualRatePercent, tenureYears).totalMaturityValue;
+    }
+
     /**
      * Compares 3-Way Surplus Allocation for parents & irregular income earners:
      * 1. Idle Bank Account (3% p.a.)

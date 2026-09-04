@@ -107,13 +107,17 @@ public class AiActionNavigator {
         if (nav != null) {
             try {
                 if ("SIP".equals(tag)) {
-                    nav.getMenu().findItem(R.id.nav_calculator).setChecked(true);
+                    android.view.MenuItem item = nav.getMenu().findItem(R.id.nav_calculator);
+                    if (item != null) item.setChecked(true);
                 } else if ("TX".equals(tag)) {
-                    nav.getMenu().findItem(R.id.nav_transactions).setChecked(true);
+                    android.view.MenuItem item = nav.getMenu().findItem(R.id.nav_dashboard);
+                    if (item != null) item.setChecked(true);
                 } else if ("PROFILE".equals(tag)) {
-                    nav.getMenu().findItem(R.id.nav_profile).setChecked(true);
+                    android.view.MenuItem item = nav.getMenu().findItem(R.id.nav_profile);
+                    if (item != null) item.setChecked(true);
                 } else if ("DASHBOARD".equals(tag)) {
-                    nav.getMenu().findItem(R.id.nav_dashboard).setChecked(true);
+                    android.view.MenuItem item = nav.getMenu().findItem(R.id.nav_dashboard);
+                    if (item != null) item.setChecked(true);
                 }
             } catch (Exception ignored) {}
         }

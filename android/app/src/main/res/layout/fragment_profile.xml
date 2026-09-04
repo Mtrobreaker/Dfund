@@ -5,15 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:clipToPadding="false"
+    android:paddingBottom="160dp"
     android:background="@color/canvas_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:clipToPadding="false"
-        android:paddingBottom="100dp">
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
 
         <!-- Title Header -->
         <TextView
@@ -387,6 +389,58 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Card 3.5: Financial Profile Setup -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/border_light_green"
+            app:cardBackgroundColor="@color/surface_card"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Financial Profile"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_profile_financial_summary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Work: Salaried · Income: ₹25,000 · Essentials: ₹16,800"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="14dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_retake_onboarding"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Update Financial Profile"
+                    android:textColor="@color/primary_dark_green"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_sparkle"
+                    app:iconTint="@color/primary_dark_green"
+                    app:iconGravity="textStart"
+                    app:cornerRadius="14dp"
+                    app:backgroundTint="@color/surface_light_green" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <!-- Card 4: Logout Action Button -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -437,6 +491,11 @@
                     app:backgroundTint="@color/alert_coral_light" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <!-- Bottom scroll clearance spacer -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="140dp" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

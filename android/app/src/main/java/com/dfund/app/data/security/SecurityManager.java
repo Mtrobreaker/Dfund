@@ -18,7 +18,7 @@ public class SecurityManager {
     private static volatile SecurityManager instance;
     private SharedPreferences securePrefs;
 
-    private SecurityManager(Context context) {
+    public SecurityManager(Context context) {
         try {
             MasterKey masterKey = new MasterKey.Builder(context)
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
@@ -119,6 +119,9 @@ public class SecurityManager {
             .remove(KEY_RISK_LEVEL)
             .remove(KEY_MONTHLY_BUFFER)
             .remove(KEY_BIOMETRIC_ENABLED)
+            .putBoolean(KEY_ONBOARDING_COMPLETED, false)
+            .remove(KEY_MOBILE_NUMBER)
+            .remove(KEY_PAN_NUMBER)
             .putString(KEY_DEVICE_ID, "dfund_" + UUID.randomUUID().toString().substring(0, 12))
             .apply();
 
@@ -138,5 +141,131 @@ public class SecurityManager {
 
     public boolean isDarkMode() {
         return "dark".equalsIgnoreCase(getThemeMode());
+    }
+
+    // --- Onboarding & Financial Profile Storage ---
+    private static final String KEY_ONBOARDING_COMPLETED = "key_onboarding_completed";
+    private static final String KEY_MOBILE_NUMBER = "key_mobile_number";
+    private static final String KEY_PAN_NUMBER = "key_pan_number";
+    private static final String KEY_JOB_TYPE = "key_job_type";
+    private static final String KEY_INCOME_FREQUENCY = "key_income_frequency";
+    private static final String KEY_TYPICAL_INCOME = "key_typical_income";
+    private static final String KEY_MANDATORY_EXPENSES_TOTAL = "key_mandatory_expenses_total";
+    private static final String KEY_DESIRED_SAVINGS = "key_desired_savings";
+    private static final String KEY_DESIRED_INVESTMENT = "key_desired_investment";
+    private static final String KEY_FINANCIAL_PRIORITY = "key_financial_priority";
+    private static final String KEY_VOICE_NAV_ENABLED = "key_voice_nav_enabled";
+    private static final String KEY_SMS_PERMISSION_GRANTED = "key_sms_permission_granted";
+
+    public boolean isOnboardingCompleted() {
+        return securePrefs.getBoolean(KEY_ONBOARDING_COMPLETED, false);
+    }
+
+    public void setOnboardingCompleted(boolean completed) {
+        securePrefs.edit().putBoolean(KEY_ONBOARDING_COMPLETED, completed).apply();
+    }
+
+    public String getMobileNumber() {
+        return securePrefs.getString(KEY_MOBILE_NUMBER, "9876543210");
+    }
+
+    public void setMobileNumber(String mobile) {
+        securePrefs.edit().putString(KEY_MOBILE_NUMBER, mobile).apply();
+    }
+
+    public String getPanNumber() {
+        return securePrefs.getString(KEY_PAN_NUMBER, "");
+    }
+
+    public void setPanNumber(String pan) {
+        securePrefs.edit().putString(KEY_PAN_NUMBER, pan).apply();
+    }
+
+    public String getJobType() {
+        return securePrefs.getString(KEY_JOB_TYPE, "gig");
+    }
+
+    public void setJobType(String jobType) {
+        securePrefs.edit().putString(KEY_JOB_TYPE, jobType).apply();
+    }
+
+    public String getIncomeFrequency() {
+        return securePrefs.getString(KEY_INCOME_FREQUENCY, "monthly");
+    }
+
+    public void setIncomeFrequency(String frequency) {
+        securePrefs.edit().putString(KEY_INCOME_FREQUENCY, frequency).apply();
+    }
+
+    public float getTypicalIncome() {
+        return securePrefs.getFloat(KEY_TYPICAL_INCOME, 24000.0f);
+    }
+
+    public void setTypicalIncome(float income) {
+        securePrefs.edit().putFloat(KEY_TYPICAL_INCOME, income).apply();
+    }
+
+    public void setTypicalIncome(double income) {
+        setTypicalIncome((float) income);
+    }
+
+    public float getMandatoryExpensesTotal() {
+        return securePrefs.getFloat(KEY_MANDATORY_EXPENSES_TOTAL, 14000.0f);
+    }
+
+    public void setMandatoryExpensesTotal(float total) {
+        securePrefs.edit().putFloat(KEY_MANDATORY_EXPENSES_TOTAL, total).apply();
+    }
+
+    public void setMandatoryExpensesTotal(double total) {
+        setMandatoryExpensesTotal((float) total);
+    }
+
+    public float getDesiredSavings() {
+        return securePrefs.getFloat(KEY_DESIRED_SAVINGS, 3000.0f);
+    }
+
+    public void setDesiredSavings(float savings) {
+        securePrefs.edit().putFloat(KEY_DESIRED_SAVINGS, savings).apply();
+    }
+
+    public void setDesiredSavings(double savings) {
+        setDesiredSavings((float) savings);
+    }
+
+    public float getDesiredInvestment() {
+        return securePrefs.getFloat(KEY_DESIRED_INVESTMENT, 1000.0f);
+    }
+
+    public void setDesiredInvestment(float investment) {
+        securePrefs.edit().putFloat(KEY_DESIRED_INVESTMENT, investment).apply();
+    }
+
+    public void setDesiredInvestment(double investment) {
+        setDesiredInvestment((float) investment);
+    }
+
+    public String getFinancialPriority() {
+        return securePrefs.getString(KEY_FINANCIAL_PRIORITY, "manage_expenses");
+    }
+
+    public void setFinancialPriority(String priority) {
+        securePrefs.edit().putString(KEY_FINANCIAL_PRIORITY, priority).apply();
+    }
+
+    public boolean isVoiceNavEnabled() {
+        return securePrefs.getBoolean(KEY_VOICE_NAV_ENABLED, true);
+    }
+
+    public void setVoiceNavEnabled(boolean enabled) {
+        securePrefs.edit().putBoolean(KEY_VOICE_NAV_ENABLED, enabled).apply();
+    }
+
+    public boolean isSmsAccessGranted() {
+        return securePrefs.getBoolean(KEY_SMS_PERMISSION_GRANTED, true);
+    }
+
+    public void setSmsAccessGranted(boolean granted) {
+        securePrefs.edit().putBoolean(KEY_SMS_PERMISSION_GRANTED, granted).apply();
     }
 }

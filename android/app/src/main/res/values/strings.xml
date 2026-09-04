@@ -1,11 +1,18 @@
 <resources>
     <string name="app_name">DFund</string>
+    <string name="tagline">Plan wisely. Save effortlessly</string>
+    <string name="brand_name">DFUND</string>
+    <string name="brand_tagline">Plan wisely. Save effortlessly</string>
     <string name="notification_service_label">DFund UPI Alerts Listener</string>
 
     <!-- Navigation & Headers -->
-    <string name="nav_dashboard">My Money</string>
-    <string name="nav_calculator">Grow Money</string>
-    <string name="nav_transactions">Transactions</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_savings">Savings</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_expenses">Expenses</string>
+    <string name="nav_dashboard">Home</string>
+    <string name="nav_calculator">Savings</string>
+    <string name="nav_transactions">Expenses</string>
     <string name="nav_settings">Settings</string>
 
     <!-- Three Buckets Dashboard -->
@@ -20,7 +27,7 @@
     <string name="surplus_detected_title">Extra Money Available!</string>
     <string name="surplus_detected_msg">You have ₹%1$s surplus. Don\'t leave it idle in your bank account!</string>
     <string name="btn_see_growth_options">See How It Can Grow</string>
-    <string name="btn_voice_action">Tap &amp; Speak</string>
+    <string name="btn_voice_action">Tap to speak</string>
 
     <!-- Financial Overviews -->
     <string name="label_income">Earned</string>
@@ -43,9 +50,289 @@
     <string name="compare_micro_sip">Micro-SIP Index (12.5%%)</string>
     <string name="compare_gold">Digital Gold (10%%)</string>
 
+    <!-- Splash Screen -->
+    <string name="splash_title">DFUND</string>
+    <string name="splash_tagline">Plan wisely. Save effortlessly</string>
+
+    <!-- Language Selection -->
+    <string name="choose_language">Choose your language</string>
+    <string name="choose_language_desc">Select your preferred language to continue</string>
+    <string name="onboarding_lang_title">Choose your language</string>
+    <string name="onboarding_lang_subtitle">Select your preferred language to continue</string>
+    <string name="lang_english">English</string>
+    <string name="lang_hindi">हिंदी</string>
+    <string name="lang_tamil">தமிழ்</string>
+    <string name="lang_telugu">తెలుగు</string>
+    <string name="lang_malayalam">മലയാളം</string>
+    <string name="voice_navigation">Voice Navigation</string>
+    <string name="voice_nav_desc">Speak to navigate and ask questions easily in your language</string>
+    <string name="voice_nav_title">Voice Navigation</string>
+    <string name="voice_nav_subtitle">Enable voice guidance throughout the app</string>
+    <string name="btn_continue">Continue →</string>
+
+    <!-- Auth Phone & PAN -->
+    <string name="welcome_back">Welcome back</string>
+    <string name="welcome_back_desc">Enter your details to continue</string>
+    <string name="auth_welcome_back">Welcome back</string>
+    <string name="auth_enter_details">Enter your details to continue</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="phone_hint">98765 43210</string>
+    <string name="auth_phone_hint">Enter mobile number</string>
+    <string name="pan_card">PAN Card</string>
+    <string name="optional">Optional</string>
+    <string name="auth_optional">Optional</string>
+    <string name="pan_hint">ABCDE1234F</string>
+    <string name="auth_pan_hint">Enter PAN card number</string>
+    <string name="pan_helper">Helps us auto-track investments and tax benefits.</string>
+
+    <!-- SMS Permission -->
+    <string name="sms_permission_title">Help us understand your money</string>
+    <string name="sms_permission_desc">DFund reads UPI and bank SMS locally to calculate your income, expenses, and savings automatically.</string>
+    <string name="sms_intro_title">Help us understand your money</string>
+    <string name="sms_intro_subtitle">With your permission, DFund can use relevant transaction messages to organize your income, expenses and payments.</string>
+    <string name="sms_benefit_1_title">Understand income received</string>
+    <string name="sms_benefit_1_desc">Detect daily, weekly, or monthly income.</string>
+    <string name="sms_benefit_1">Understand income received</string>
+    <string name="sms_benefit_2_title">Organize spending</string>
+    <string name="sms_benefit_2_desc">Auto-categorize rent, groceries, EMIs, and bills.</string>
+    <string name="sms_benefit_2">Organize spending and recurring payments</string>
+    <string name="sms_benefit_3_title">100% On-Device Privacy</string>
+    <string name="sms_benefit_3_desc">Bank credentials, OTPs, and personal texts are never touched or sent anywhere.</string>
+    <string name="sms_benefit_3">Build a clearer financial picture</string>
+    <string name="sms_privacy_note">Your financial information is used to provide your personal insights. You control this permission and can turn it off later.</string>
+    <string name="btn_allow_sms">Allow SMS Access</string>
+    <string name="btn_enter_manually">Enter Manually Instead</string>
+    <string name="btn_not_now">Not Now</string>
+
+    <!-- Work & Income -->
+    <string name="job_type_title">1. What describes your work?</string>
+    <string name="work_income_title">Tell us about your work and income</string>
+    <string name="work_income_subtitle">This helps us create a plan that works for you.</string>
+    <string name="work_q1">1. What is your job or work?</string>
+    <string name="work_salaried">Salaried Job</string>
+    <string name="work_self_employed">Self-employed</string>
+    <string name="work_daily_wage">Daily-wage Worker</string>
+    <string name="work_gig">Gig / Part-time</string>
+    <string name="work_homemaker">Homemaker</string>
+    <string name="work_other">Other</string>
+    <string name="job_salaried">Salaried Job</string>
+    <string name="job_business">Self-employed / Business</string>
+    <string name="job_daily">Daily-wage Worker</string>
+    <string name="job_gig">Gig / Part-time Work</string>
+    <string name="job_homemaker">Homemaker</string>
+    <string name="job_other">Other</string>
+    <string name="income_freq_title">2. How often do you receive income?</string>
+    <string name="work_q2">2. How often do you receive income?</string>
+    <string name="freq_monthly">Monthly</string>
+    <string name="freq_weekly">Weekly</string>
+    <string name="freq_daily">Daily</string>
+    <string name="freq_varies">It varies</string>
+    <string name="typical_monthly_income">3. Typical monthly income</string>
+    <string name="typical_weekly_income">3. Typical weekly earnings</string>
+    <string name="typical_daily_income">3. Typical daily earnings</string>
+    <string name="typical_varies_income">3. Typical average earnings</string>
+    <string name="work_q3_monthly">3. What is your average monthly income?</string>
+    <string name="work_q3_weekly">3. What do you usually earn in a week?</string>
+    <string name="work_q3_daily">3. What do you usually earn in a working day?</string>
+    <string name="work_q3_varies">3. What is your usual income?</string>
+    <string name="work_income_hint">Enter your total take-home income after deductions.</string>
+    <string name="onboarding_change_later_note">You can change this anytime in your profile.</string>
+    <string name="note_change_later">You can change this later</string>
+
+    <!-- Mandatory Expenses -->
+    <string name="mandatory_expenses_title">Mandatory Expenses</string>
+    <string name="mandatory_expenses_banner">These help us calculate your essential needs so we never suggest saving money you actually need for basic survival.</string>
+    <string name="expenses_mandatory_title">Your mandatory monthly expenses</string>
+    <string name="expenses_mandatory_subtitle">Enter only the essential expenses you must pay every month.</string>
+    <string name="expenses_info_banner">These help us calculate your essential needs and plan your finances better.</string>
+    <string name="expense_rent">Rent / Home Loan EMI</string>
+    <string name="expense_food">Food &amp; Groceries</string>
+    <string name="expense_transport">Transport &amp; Commute</string>
+    <string name="expense_utilities">Utilities &amp; Bills</string>
+    <string name="expense_loan">Loan / EMI Payments</string>
+    <string name="expense_other">Other Essentials</string>
+    <string name="cat_rent">Rent / Home Loan (EMI)</string>
+    <string name="cat_food">Food</string>
+    <string name="cat_transport">Transport</string>
+    <string name="cat_utilities">Utilities &amp; Bills</string>
+    <string name="cat_loan">Loan / EMI Payments</string>
+    <string name="cat_others">Others</string>
+    <string name="cat_others_desc">Any other essential expense</string>
+    <string name="note_update_later">You can update this later</string>
+
+    <!-- Savings Preferences -->
+    <string name="savings_pref_title">Savings Preferences</string>
+    <string name="savings_pref_subtitle">Even small amounts saved regularly can create a big difference.</string>
+    <string name="savings_pref_banner">Start small. Stay consistent. We’ll help you grow step by step without stressing your wallet.</string>
+    <string name="savings_banner_msg">Start small. Stay consistent. We’ll help you grow.</string>
+    <string name="desired_savings_title">1. How much would you like to save each month?</string>
+    <string name="desired_invest_title">2. How much would you like to invest each month?</string>
+    <string name="savings_q1">1. How much do you want to save each month?</string>
+    <string name="savings_q1_sub">Set a comfortable amount you can save regularly.</string>
+    <string name="savings_q1_hint">Even ₹50 a day can make a big difference.</string>
+    <string name="savings_q2">2. How much do you want to invest each month?</string>
+    <string name="savings_q2_sub">Invest small, grow your future.</string>
+    <string name="savings_q2_hint">We’ll suggest simple and safe options for you.</string>
+    <string name="not_ready_to_invest">I’m not ready to invest yet — focus only on savings first</string>
+    <string name="savings_not_ready">I’m not ready to invest yet</string>
+    <string name="see_my_plan">See My Simple Plan →</string>
+
+    <!-- Priority & Plan Summary -->
+    <string name="priority_title">What is most important to you right now?</string>
+    <string name="priority_1">Manage daily expenses</string>
+    <string name="priority_2">Build emergency savings</string>
+    <string name="priority_3">Reduce loans / EMIs</string>
+    <string name="priority_4">Save for the future</string>
+    <string name="priority_5">Protect my family</string>
+    <string name="priority_6">Start investing</string>
+    <string name="priority_7">Understand investments</string>
+
+    <!-- Personalized Plan -->
+    <string name="simple_money_plan">Your Simple Money Plan</string>
+    <string name="simple_money_plan_desc">Based on your income and essential needs, here is how DFund organizes your monthly flow safely.</string>
+    <string name="plan_title">Your Simple Money Plan</string>
+    <string name="plan_subtitle">Based on your income and essential needs, here is your customized plan.</string>
+    <string name="plan_essentials_title">Essential Living Needs</string>
+    <string name="plan_emergency_title">Emergency Buffer</string>
+    <string name="plan_spending_title">Safe Spending Limit</string>
+    <string name="plan_invest_title">Future Wealth / Investment</string>
+    <string name="plan_essential">1. Cover essential expenses</string>
+    <string name="plan_emergency">2. Build emergency savings</string>
+    <string name="plan_spending">3. Keep flexible spending</string>
+    <string name="plan_investment">4. Consider investing</string>
+    <string name="plan_buffer">5. Available buffer</string>
+    <string name="plan_why_title">Why this plan?</string>
+    <string name="plan_why_desc">DFund prioritizes your essentials first. We never recommend investing money you might need for medical bills, rent, or school fees.</string>
+    <string name="go_to_dashboard">Go to Dashboard →</string>
+    <string name="btn_go_to_dashboard">Go to Dashboard →</string>
+
+    <!-- Home Screen (Image 8) -->
+    <string name="good_morning_user">Good morning, Ravi 👋</string>
+    <string name="home_greeting">Good morning, %1$s 👋</string>
+    <string name="home_greeting_sub">Stay within your limit and build your future.</string>
+    <string name="this_months_spending">This Month’s Spending</string>
+    <string name="home_spending_title">This Month’s Spending</string>
+    <string name="home_spending_limit">of ₹%1$s limit</string>
+    <string name="home_used_pct">%1$d%% used</string>
+    <string name="remaining_limit">Remaining Limit</string>
+    <string name="home_remaining_title">Remaining Limit</string>
+    <string name="home_left_to_spend">left to spend</string>
+    <string name="saved_this_month">Saved This Month</string>
+    <string name="home_saved_month_title">Saved This Month</string>
+    <string name="home_saved_growth">+12% from last month</string>
+
+    <!-- Quick Actions (Image 8) -->
+    <string name="quick_actions_title">Quick Actions</string>
+    <string name="see_all">See All ›</string>
+    <string name="action_add_income">Add Income</string>
+    <string name="action_add_income_sub">Record your earnings</string>
+    <string name="action_add_expense">Add Expense</string>
+    <string name="action_add_expense_sub">Track your spending</string>
+    <string name="action_emergency_fund">Emergency Fund</string>
+    <string name="action_emergency_fund_sub">Build your safety net</string>
+    <string name="action_save_invest">Save &amp; Invest</string>
+    <string name="action_save_invest_sub">Grow your money</string>
+
+    <string name="banner_small_steps_title">Small steps, big change!</string>
+    <string name="banner_small_steps_desc">Save a little today, secure your tomorrow.</string>
+    <string name="banner_title">Small steps, big change!</string>
+    <string name="banner_sub">Save a little today, secure your tomorrow.</string>
+    <string name="btn_get_started">Get Started →</string>
+    <string name="tap_to_speak">Tap to speak</string>
+
+    <!-- Savings Screen (Image 7) -->
+    <string name="savings_investments_title">Savings &amp; Investments</string>
+    <string name="savings_investments_desc">Save systematically, invest smartly, secure your tomorrow.</string>
+    <string name="total_saved_label">Total Saved</string>
+    <string name="savings_screen_title">Savings</string>
+    <string name="savings_screen_sub">See how much you’ve saved, how much you can save, and how your money can grow.</string>
+    <string name="savings_total_label">Total Saved</string>
+    <string name="savings_total_sub">Your total savings so far</string>
+    <string name="savings_this_month">This month</string>
+    <string name="savings_previous">Previous savings</string>
+    <string name="savings_month_title">This Month’s Savings</string>
+    <string name="savings_saved_suffix">saved</string>
+    <string name="savings_target_label">Target: ₹%1$s</string>
+    <string name="savings_remaining_label">₹%1$s remaining</string>
+    <string name="savings_potential_title">You can potentially save</string>
+    <string name="savings_per_month">/ month</string>
+    <string name="savings_potential_desc">Based on your income and recent expenses, you may be able to save around ₹%1$s every month.</string>
+    <string name="btn_adjust_details">Adjust My Details</string>
+    <string name="calc_how_title">How we calculated this?</string>
+    <string name="calc_monthly_income">Monthly income</string>
+    <string name="calc_essential_exp">Essential expenses</string>
+    <string name="calc_emi_commitments">EMI / commitments</string>
+    <string name="calc_other_exp">Other expenses</string>
+    <string name="calc_potential">Potential savings</string>
+
+    <string name="money_goes_title">Where Your Money Goes (Monthly)</string>
+    <string name="flow_income">Income</string>
+    <string name="flow_expenses">Expenses (Essentials + Others)</string>
+    <string name="flow_available">Available for saving</string>
+    <string name="btn_update">Update</string>
+    <string name="btn_edit">Edit</string>
+
+    <string name="your_investments_title">Your Investments</string>
+    <string name="inv_type_header">Investment Type</string>
+    <string name="inv_invested_header">Amount Invested</string>
+    <string name="inv_value_header">Current Value</string>
+    <string name="inv_month_header">This Month</string>
+    <string name="inv_sip_name">SIP (Mutual Fund)</string>
+    <string name="inv_sip_desc">Invested monthly</string>
+    <string name="inv_rd_name">Recurring Deposit</string>
+    <string name="inv_rd_desc">Fixed savings</string>
+
+    <string name="what_to_do_next_title">What You Can Do Next</string>
+    <string name="what_to_do_next_sub">Based on your financial situation, here are some suggestions:</string>
+    <string name="suggestion_sip_title">Start a SIP</string>
+    <string name="suggestion_sip_amount">₹1,000 / month</string>
+    <string name="suggestion_sip_desc">You have around ₹4,000 available after expenses. Investing ₹1,000 can help you build wealth over time.</string>
+    <string name="suggestion_emergency_title">Build an Emergency Fund</string>
+    <string name="suggestion_emergency_amount">₹2,000 / month</string>
+    <string name="suggestion_emergency_desc">Keep at least 3–6 months of expenses in a safe and easily accessible account.</string>
+
+    <string name="savings_vs_invest_title">Savings vs Investment</string>
+    <string name="def_savings_title">Savings</string>
+    <string name="def_savings_desc">Money kept available for short-term needs and emergencies.</string>
+    <string name="def_invest_title">Investments</string>
+    <string name="def_invest_desc">Money put to work for longer-term growth and may involve risk.</string>
+
+    <string name="compound_title">If You Invest Every Month</string>
+    <string name="compound_monthly_amount">Monthly amount</string>
+    <string name="compound_time_period">Time period</string>
+    <string name="compound_total_invested">Total amount invested</string>
+    <string name="compound_estimated_value">Estimated value</string>
+    <string name="compound_estimated_growth">Estimated growth</string>
+    <string name="compound_disclaimer">Assuming 12% annual returns. This is an estimate, not a guaranteed return.</string>
+
+    <string name="goal_emergency_title">Emergency Fund</string>
+    <string name="goal_emergency_desc">For unexpected expenses</string>
+    <string name="ask_dfund_title">Ask DFund</string>
+    <string name="ask_dfund_sub">Get simple answers about your money.</string>
+    <string name="ask_dfund_hint">Ask a question…</string>
+    <string name="chip_ask_1">Can I save ₹2,000 this month?</string>
+    <string name="chip_ask_2">How much should I invest?</string>
+    <string name="chip_ask_3">Where is most of my money going?</string>
+
+    <!-- Expenses Screen -->
+    <string name="expenses_title">Where did my money go?</string>
+    <string name="btn_add_transaction">+ Add Transaction</string>
+    <string name="history_title">Transaction History</string>
+
+    <!-- Insurance Educational Section -->
+    <string name="insurance_title">Protection &amp; Insurance</string>
+    <string name="insurance_sub">Understand how to protect your family and hard-earned savings.</string>
+    <string name="ins_health_title">Health Insurance</string>
+    <string name="ins_health_desc">Helps protect your savings from large medical expenses if you or your family fall sick.</string>
+    <string name="ins_accident_title">Personal Accident Cover</string>
+    <string name="ins_accident_desc">Provides essential financial relief if an injury prevents you from working.</string>
+    <string name="ins_life_title">Life Insurance</string>
+    <string name="ins_life_desc">May help protect family members who depend on your daily or monthly income.</string>
+    <string name="ins_do_i_need">Do I need this?</string>
+
     <!-- Voice Dialog -->
-    <string name="voice_dialog_title">DFund Financial Voice Assistant</string>
-    <string name="voice_listening">Listening… Speak in English, தமிழ், తెలుగు, or മലയാളം</string>
+    <string name="voice_dialog_title">Ask DFund</string>
+    <string name="voice_listening">Listening… Tell me what you need</string>
     <string name="voice_processing">Understanding your request…</string>
     <string name="voice_example_1">Try saying: "Show my food expenses"</string>
     <string name="voice_example_2">Try saying: "Calculate SIP for ₹500 for 3 years"</string>
@@ -58,11 +345,13 @@
     <string name="permission_sms_rationale">DFund needs SMS permission to automatically track your bank UPI expenses and upcoming EMIs without manual typing.</string>
     <string name="permission_audio_rationale">DFund needs Microphone access to let you command the app using your voice in your native language.</string>
 
-    <!-- Profile & Logout -->
-    <string name="nav_profile">Profile</string>
+    <!-- Profile & Session Management -->
     <string name="profile_title">My Profile &amp; Settings</string>
     <string name="profile_security_badge">Bank-Grade AES-256 Encrypted</string>
     <string name="profile_account_id">Device ID: %1$s</string>
+    <string name="profile_phone_label">Mobile: +91 %1$s</string>
+    <string name="profile_pan_label">PAN: %1$s</string>
+    <string name="profile_retake_onboarding">Review &amp; Edit Financial Profile</string>
     <string name="profile_risk_title">Investment Risk Appetite</string>
     <string name="profile_risk_conservative">Conservative</string>
     <string name="profile_risk_moderate">Balanced</string>
