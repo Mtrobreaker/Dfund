@@ -137,6 +137,43 @@ public class LocalAiIntentParser {
             return new VoiceAction("ACTION_ALLOCATE_SURPLUS", params, response);
         }
 
+        // 6. Profile & Settings
+        if (pLower.contains("profile") || pLower.contains("account") || pLower.contains("சுயவிவரம்") || 
+            pLower.contains("ப்ரொஃபைல்") || pLower.contains("ప్రొఫైల్") || pLower.contains("సెట్టింగ్స్") || 
+            pLower.contains("പ്രൊഫൈൽ") || pLower.contains("അക്കൗണ്ട്")) {
+
+            Map<String, Object> params = new HashMap<>();
+            String response;
+            if ("ta".equals(lang)) {
+                response = "உங்கள் சுயவிவரம் மற்றும் பாதுகாப்பு அமைப்புகள் திறக்கப்பட்டுள்ளன.";
+            } else if ("te".equals(lang)) {
+                response = "మీ ప్రొఫైల్ మరియు భద్రతా సెట్టింగ్‌లు తెరవబడ్డాయి.";
+            } else if ("ml".equals(lang)) {
+                response = "നിങ്ങളുടെ പ്രൊഫൈലും സുരക്ഷാ ക്രമീകരണങ്ങളും തുറന്നു.";
+            } else {
+                response = "Opened your profile and security settings.";
+            }
+            return new VoiceAction("ACTION_OPEN_PROFILE", params, response);
+        }
+
+        // 7. Logout
+        if (pLower.contains("logout") || pLower.contains("log out") || pLower.contains("வெளியேறு") || 
+            pLower.contains("லாக் அவுட்") || pLower.contains("లాగ్ అవుట్") || pLower.contains("ലോഗ് ഔട്ട്")) {
+
+            Map<String, Object> params = new HashMap<>();
+            String response;
+            if ("ta".equals(lang)) {
+                response = "DFund-லிருந்து வெளியேறுவதற்கான உறுதிப்படுத்தல் திறக்கப்பட்டது.";
+            } else if ("te".equals(lang)) {
+                response = "DFund నుండి లాగ్ అవుట్ చేయడానికి నిర్ధారణ తెరవబడింది.";
+            } else if ("ml".equals(lang)) {
+                response = "DFund-ൽ നിന്ന് ലോഗ് ഔട്ട് ചെയ്യാനുള്ള സ്ഥിരീകരണം തുറന്നു.";
+            } else {
+                response = "Opened logout confirmation dialog.";
+            }
+            return new VoiceAction("ACTION_LOGOUT", params, response);
+        }
+
         // Default: Open SIP Calculator as helpful financial action
         Map<String, Object> params = new HashMap<>();
         params.put("amount", 500.0);

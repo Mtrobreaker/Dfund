@@ -222,9 +222,9 @@ class SarvamService:
             "{\n"
             '  "tamil_suggestion": "<Tamil: explicit statement of what was done and exact result, max 2 sentences>",\n'
             '  "english_suggestion": "<English: explicit statement of what was done and exact result, max 2 sentences>",\n'
-            '  "action_type": "<ACTION_OPEN_SIP_CALCULATOR or ACTION_CHECK_EMIS or ACTION_ALLOCATE_SURPLUS or ACTION_SHOW_SPENDING or ACTION_CHANGE_LANGUAGE or ACTION_FINANCIAL_ADVICE>",\n'
+            '  "action_type": "<ACTION_OPEN_SIP_CALCULATOR or ACTION_CHECK_EMIS or ACTION_ALLOCATE_SURPLUS or ACTION_SHOW_SPENDING or ACTION_OPEN_PROFILE or ACTION_LOGOUT or ACTION_CHANGE_LANGUAGE or ACTION_FINANCIAL_ADVICE>",\n'
             '  "parameters": {"amount": 500.0, "category": "FOOD", "tenure_years": 3},\n'
-            '  "action_target_screen": "<SCREEN_DASHBOARD or SCREEN_SIP or SCREEN_TRANSACTIONS>"\n'
+            '  "action_target_screen": "<SCREEN_DASHBOARD or SCREEN_SIP or SCREEN_TRANSACTIONS or SCREEN_PROFILE>"\n'
             "}"
         )
 
@@ -370,7 +370,27 @@ class SarvamService:
                 "action_target_screen": "SCREEN_TRANSACTIONS"
             }
 
-        # 4. General Financial Advice
+        # 4. Profile Intent
+        elif any(w in q_lower for w in ["profile", "சுயவிவரம்", "ப்ரொஃபைல்", "அமைப்புகள்", "account"]):
+            return {
+                "tamil_suggestion": "உங்கள் சுயவிவரம் மற்றும் பாதுகாப்பு அமைப்புகள் திறக்கப்பட்டுள்ளன.",
+                "english_suggestion": "Opened your profile and security settings.",
+                "action_type": "ACTION_OPEN_PROFILE",
+                "parameters": {},
+                "action_target_screen": "SCREEN_PROFILE"
+            }
+
+        # 5. Logout Intent
+        elif any(w in q_lower for w in ["logout", "log out", "வெளியேறு", "லாக் அவுட்"]):
+            return {
+                "tamil_suggestion": "DFund-லிருந்து வெளியேறுவதற்கான உறுதிப்படுத்தல் திறக்கப்பட்டது.",
+                "english_suggestion": "Opened logout confirmation dialog.",
+                "action_type": "ACTION_LOGOUT",
+                "parameters": {},
+                "action_target_screen": "SCREEN_DASHBOARD"
+            }
+
+        # 6. General Financial Advice
         else:
             surplus_str = f"{round(surplus):,}"
             return {

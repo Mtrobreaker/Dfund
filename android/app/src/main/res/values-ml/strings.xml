@@ -57,4 +57,28 @@
     <string name="sample_data_loaded">മാതൃകാ ഇടപാടുകൾ വിജയകരമായി ചേർത്തു!</string>
     <string name="permission_sms_rationale">നിങ്ങളുടെ UPI ഇടപാടുകൾ രേഖപ്പെടുത്താൻ SMS അനുമതി ആവശ്യമാണ്.</string>
     <string name="permission_audio_rationale">നിങ്ങളുടെ മാതൃഭാഷയിൽ ശബ്ദം ഉപയോഗിച്ച് ആപ്പ് നിയന്ത്രിക്കാൻ മൈക്രോഫോൺ അനുമതി ആവശ്യമാണ്.</string>
+
+    <!-- Profile & Logout -->
+    <string name="nav_profile">പ്രൊഫൈൽ</string>
+    <string name="profile_title">എന്റെ പ്രൊഫൈൽ &amp; ക്രമീകരണങ്ങൾ</string>
+    <string name="profile_security_badge">ബാങ്ക് നിലവാരമുള്ള AES-256 സുരക്ഷിതം</string>
+    <string name="profile_account_id">ഉപകരണ ഐഡി: %1$s</string>
+    <string name="profile_risk_title">നിക്ഷേപ റിസ്ക് മുൻഗണന</string>
+    <string name="profile_risk_conservative">സുരക്ഷിതം</string>
+    <string name="profile_risk_moderate">സന്തുലിതം</string>
+    <string name="profile_risk_aggressive">വളർച്ചാധിഷ്ഠിതം</string>
+    <string name="profile_safety_cushion">പ്രതിമാസ അടിയന്തര ഫണ്ട്</string>
+    <string name="profile_pref_title">മുൻഗണനകളും സുരക്ഷയും</string>
+    <string name="profile_pref_theme">ഡാർക്ക് തീം (Dark Theme)</string>
+    <string name="profile_pref_lang">ആപ്പ് ഭാഷ</string>
+    <string name="profile_pref_biometric">ബയോമെട്രിക് ലോക്ക്</string>
+    <string name="profile_pref_sms">ഓട്ടോമേറ്റഡ് SMS ട്രാക്കിംഗ്</string>
+    <string name="profile_status_active">സജീവം • തത്സമയം</string>
+    <string name="btn_edit_name">പേര് മാറ്റുക</string>
+    <string name="btn_logout">ലോഗ് ഔട്ട് (Log Out)</string>
+    <string name="logout_dialog_title">DFund-ൽ നിന്ന് ലോഗ് ഔട്ട് ചെയ്യുക</string>
+    <string name="logout_dialog_msg">നിങ്ങൾ തീർച്ചയായും ലോഗ് ഔട്ട് ചെയ്യാൻ ആഗ്രഹിക്കുന്നുണ്ടോ? നിങ്ങളുടെ സെഷൻ ക്ലിയർ ചെയ്യപ്പെടും.</string>
+    <string name="logout_confirm">ലോഗ് ഔട്ട്</string>
+    <string name="logout_cancel">റദ്ദാക്കുക</string>
+    <string name="logout_toast">വിജയകരമായി ലോഗ് ഔട്ട് ചെയ്തു</string>
 </resources>

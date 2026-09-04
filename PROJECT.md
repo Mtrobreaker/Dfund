@@ -126,13 +126,27 @@ d:/Dfund/
   - Completely bypassed Ollama to run an all-in-one native Indian AI stack.
   - Verified live: Spoken query translated to Tamil -> analyzed by `sarvam-105b-conversations` -> produced explicit what was done + exact numerical results -> dispatched in-app action payload -> synthesized Bulbul v3 neural voice speech.
 
+- [x] **Milestone 17**: User Profile & Session Management / Logout:
+  - Added dedicated **Profile** screen accessible via both a 4th tab in bottom navigation (`Profile`) and the top app bar avatar button (`btn_top_profile`).
+  - Implemented Apple Wallet / Toss-style fintech card layout:
+    - User Header Card: Circular avatar, editable user name dialog, dynamic device ID, bank-grade AES-256 encryption status pill.
+    - Emergency Safety Cushion Card: Real-time adjustable buffer amount with `+` and `-` increments.
+    - Investment Risk Appetite: Interactive chip selection (Conservative, Balanced/Moderate, Aggressive Growth).
+    - Preferences & Security Card: Dark/Light theme toggle switch, Biometric App Lock toggle, App Language selector (English, Tamil, Telugu, Malayalam), and Automated SMS Tracking status.
+    - Account Session Card: Styled red card with exit icon button `Log Out`.
+  - Added Material 3 confirmation dialog for logout (`Log Out of DFund`) with Cancel and Log Out actions.
+  - Safe Session Reset: `SecurityManager.logout()` clears local session keys, generates a fresh anonymous device ID, preserves user theme and language settings, shows a confirmation Toast, and navigates cleanly back to the Dashboard with synchronized bottom navigation.
+  - Backend API: Added `GET /api/users/profile`, `PUT /api/users/profile`, and `POST /api/users/logout` with Pydantic schemas and full pytest coverage.
+  - Autonomous Voice Navigation: Added `ACTION_OPEN_PROFILE` and `ACTION_LOGOUT` intents to Sarvam 105B LLM prompt, fallback rules, and Android `AiActionNavigator` / `LocalAiIntentParser`.
+
 ---
 
 ## 7. Current Status
-- **Phase**: Milestone 16 Complete — Full Sarvam AI Suite (`sarvam-105b-conversations`, `saaras:v4`, `mayura:v1`, `bulbul:v3`) active and verified live.
+- **Phase**: Milestone 17 Complete — User Profile, Security Settings, and Secure Session Logout fully implemented and verified on live mobile device.
 - **APK Location**: `d:\Dfund\DFund-app-debug.apk` in root folder and `d:\Dfund\android\app\build\outputs\apk\debug\app-debug.apk`.
-- **Backend Status**: Online at `http://0.0.0.0:8000` powered by Sarvam 105B Conversations LLM and Sarvam Voice APIs.
+- **Backend Status**: Online at `http://0.0.0.0:8000` with User Profile endpoints and Sarvam 105B AI integration.
 - **Device Status**: Live physical device (`00093347I000307`) connected, updated APK installed, reverse port forwarding enabled.
 - **Memory**: Graphify Knowledge Graph synchronized.
+
 
 

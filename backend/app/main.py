@@ -8,6 +8,7 @@ from app.database import init_db
 from app.api.transactions import router as transactions_router
 from app.api.voice import router as voice_router
 from app.api.savings import router as savings_router
+from app.api.users import router as users_router
 
 logging.basicConfig(
     level=logging.INFO,
@@ -42,6 +43,7 @@ app.add_middleware(
 app.include_router(transactions_router)
 app.include_router(voice_router)
 app.include_router(savings_router)
+app.include_router(users_router)
 
 @app.get("/", tags=["Root"])
 async def root():

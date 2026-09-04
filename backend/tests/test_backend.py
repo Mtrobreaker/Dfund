@@ -104,3 +104,41 @@ async def test_batch_transaction_sync():
         assert data["status"] == "success"
         assert data["imported"] >= 1
 
+@pytest.mark.asyncio
+async def test_user_profile_and_logout():
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
+        import time
+        test_device = f"user_test_{int(time.time()*1000)}"
+
+        # 1. Fetch initial profile
+        res = await client.get(f"/api/users/profile?device_id={test_device}")
+        assert res.status_code == 200
+        p_data = res.json()
+        assert p_data["device_id"] == test_device
+        assert p_data["name"] == "Karthik Raja"
+        assert p_data["risk_level"] == "moderate"
+
+        # 2. Update profile
+        update_payload = {
+            "device_id": test_device,
+            "name": "Karthik R.",
+            "risk_level": "aggressive",
+            "monthly_safety_buffer": 5000.0,
+            "language": "ta"
+        }
+        res_up = await client.put("/api/users/profile", json=update_payload)
+        assert res_up.status_code == 200
+        up_data = res_up.json()
+        assert up_data["name"] == "Karthik R."
+        assert up_data["risk_level"] == "aggressive"
+        assert up_data["monthly_safety_buffer"] == 5000.0
+        assert up_data["language"] == "ta"
+
+        # 3. Test logout endpoint
+        res_logout = await client.post("/api/users/logout", json={"device_id": test_device})
+        assert res_logout.status_code == 200
+        logout_data = res_logout.json()
+        assert logout_data["status"] == "success"
+
+

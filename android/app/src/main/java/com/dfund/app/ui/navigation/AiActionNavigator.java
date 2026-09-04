@@ -61,6 +61,24 @@ public class AiActionNavigator {
                 navigateTo(activity, emiFrag, "TX");
                 break;
 
+            case "ACTION_OPEN_PROFILE":
+                navigateTo(activity, com.dfund.app.ui.ProfileFragment.newInstance(), "PROFILE");
+                break;
+
+            case "ACTION_LOGOUT":
+                new com.google.android.material.dialog.MaterialAlertDialogBuilder(activity)
+                    .setTitle(R.string.logout_dialog_title)
+                    .setMessage(R.string.logout_dialog_msg)
+                    .setIcon(R.drawable.ic_logout)
+                    .setPositiveButton(R.string.logout_confirm, (d, w) -> {
+                        DFundApplication.getInstance().getSecurityManager().logout();
+                        android.widget.Toast.makeText(activity, R.string.logout_toast, android.widget.Toast.LENGTH_LONG).show();
+                        navigateTo(activity, new DashboardFragment(), "DASHBOARD");
+                    })
+                    .setNegativeButton(R.string.logout_cancel, null)
+                    .show();
+                break;
+
             case "ACTION_CHANGE_LANGUAGE":
                 if (params != null && params.containsKey("language")) {
                     String lang = String.valueOf(params.get("language"));
@@ -92,6 +110,8 @@ public class AiActionNavigator {
                     nav.getMenu().findItem(R.id.nav_calculator).setChecked(true);
                 } else if ("TX".equals(tag)) {
                     nav.getMenu().findItem(R.id.nav_transactions).setChecked(true);
+                } else if ("PROFILE".equals(tag)) {
+                    nav.getMenu().findItem(R.id.nav_profile).setChecked(true);
                 } else if ("DASHBOARD".equals(tag)) {
                     nav.getMenu().findItem(R.id.nav_dashboard).setChecked(true);
                 }

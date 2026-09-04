@@ -57,4 +57,28 @@
     <string name="sample_data_loaded">నమూనా లావాదేవీలు విజయవంతంగా జోడించబడ్డాయి!</string>
     <string name="permission_sms_rationale">మీ UPI లావాదేవీలను సులభంగా రికార్డ్ చేయడానికి SMS అనుమతి అవసరం.</string>
     <string name="permission_audio_rationale">మీ మాతృభాషలో వాయిస్ ద్వారా ఉపయోగించడానికి మైక్రోఫోన్ అనుమతి అవసరం.</string>
+
+    <!-- Profile & Logout -->
+    <string name="nav_profile">ప్రొఫైల్</string>
+    <string name="profile_title">నా ప్రొఫైల్ &amp; సెట్టింగ్‌లు</string>
+    <string name="profile_security_badge">బ్యాంక్-గ్రేడ్ AES-256 గుప్తీకరించబడింది</string>
+    <string name="profile_account_id">పరికర ఐడి: %1$s</string>
+    <string name="profile_risk_title">పెట్టుబడి రిస్క్ ప్రాధాన్యత</string>
+    <string name="profile_risk_conservative">సురక్షితమైనది</string>
+    <string name="profile_risk_moderate">సమతుల్యమైనది</string>
+    <string name="profile_risk_aggressive">వృద్ధి ఆధారిత</string>
+    <string name="profile_safety_cushion">నెలవారీ అత్యవసర నిధి</string>
+    <string name="profile_pref_title">ప్రాధాన్యతలు &amp; భద్రత</string>
+    <string name="profile_pref_theme">డార్క్ థీమ్ (Dark Theme)</string>
+    <string name="profile_pref_lang">యాప్ భాష</string>
+    <string name="profile_pref_biometric">బయోమెట్రిక్ లాక్</string>
+    <string name="profile_pref_sms">ఆటోమేటెడ్ SMS ట్రాకింగ్</string>
+    <string name="profile_status_active">యాక్టివ్ • లైవ్</string>
+    <string name="btn_edit_name">పేరు మార్చు</string>
+    <string name="btn_logout">లాగ్ అవుట్ (Log Out)</string>
+    <string name="logout_dialog_title">DFund నుండి లాగ్ అవుట్</string>
+    <string name="logout_dialog_msg">మీరు ఖచ్చితంగా లాగ్ అవుట్ చేయాలనుకుంటున్నారా? మీ ప్రస్తుత సెషన్ తొలగించబడుతుంది.</string>
+    <string name="logout_confirm">లాగ్ అవుట్</string>
+    <string name="logout_cancel">రద్దు చేయి</string>
+    <string name="logout_toast">విజయవంతంగా లాగ్ అవుట్ చేయబడింది</string>
 </resources>

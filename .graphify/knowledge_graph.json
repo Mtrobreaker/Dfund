@@ -231,6 +231,11 @@
       "id": "dec-sarvam-105b-suite",
       "title": "Full Sarvam AI Indian Regional Suite (105B LLM, Saaras v4, Mayura v1, Bulbul v3)",
       "rationale": "Replaced external Ollama LLM with Sarvam 105B Conversations (sarvam-105b-conversations) for native Indian financial reasoning and tool dispatch, combined with Saaras v4 STT (23 languages), Mayura v1 Translation, and Bulbul v3 HD TTS."
+    },
+    {
+      "id": "dec-profile-logout",
+      "title": "Fintech Profile Screen & Secure Session Logout",
+      "rationale": "Added Apple Wallet/Toss style Profile card layout accessible via bottom navigation 4th tab and top app bar avatar. Features include editable username, emergency safety cushion modifier (+/-), risk appetite chip group, dark theme toggle, biometric switch, language picker, and styled red logout card. Material 3 logout confirmation dialog performs safe session key resets while maintaining user UI preferences."
     }
   ]
 }

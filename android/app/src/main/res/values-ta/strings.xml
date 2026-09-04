@@ -57,4 +57,28 @@
     <string name="sample_data_loaded">மாதிரி பரிவர்த்தனைகள் வெற்றிகரமாக சேர்க்கப்பட்டன!</string>
     <string name="permission_sms_rationale">உங்கள் UPI செலவுகள் மற்றும் வரவிருக்கும் EMI-களைத் தானாகப் பதிவு செய்ய SMS அனுமதி தேவைப்படுகிறது.</string>
     <string name="permission_audio_rationale">உங்கள் சொந்த மொழியில் குரல் மூலம் செயலியைப் பயன்படுத்த மைக்ரோஃபோன் அனுமதி தேவைப்படுகிறது.</string>
+
+    <!-- Profile & Logout -->
+    <string name="nav_profile">சுயவிவரம்</string>
+    <string name="profile_title">என் சுயவிவரம் &amp; அமைப்புகள்</string>
+    <string name="profile_security_badge">வங்கித் தரம் AES-256 என்க்ரிப்ட் செய்யப்பட்டது</string>
+    <string name="profile_account_id">சாதன எண்: %1$s</string>
+    <string name="profile_risk_title">முதலீட்டு இடர் விருப்பம்</string>
+    <string name="profile_risk_conservative">பாதுகாப்பானது</string>
+    <string name="profile_risk_moderate">சமநிலையானது</string>
+    <string name="profile_risk_aggressive">வளர்ச்சி நோக்கியது</string>
+    <string name="profile_safety_cushion">மாதாந்திர அவசரக்கால நிதி</string>
+    <string name="profile_pref_title">விருப்பத்தேர்வுகள் &amp; பாதுகாப்பு</string>
+    <string name="profile_pref_theme">இரவுப் பயன்முறை (Dark Theme)</string>
+    <string name="profile_pref_lang">செயலி மொழி</string>
+    <string name="profile_pref_biometric">பயோமெட்ரிக் பூட்டு</string>
+    <string name="profile_pref_sms">தானியங்கி SMS கண்காணிப்பு</string>
+    <string name="profile_status_active">செயலில் உள்ளது • நேரலை</string>
+    <string name="btn_edit_name">பெயரை மாற்று</string>
+    <string name="btn_logout">வெளியேறு (Log Out)</string>
+    <string name="logout_dialog_title">DFund-லிருந்து வெளியேறு</string>
+    <string name="logout_dialog_msg">நிச்சயமாக வெளியேற விரும்புகிறீர்களா? உங்கள் தற்போதைய அமர்வு அழிக்கப்படும்.</string>
+    <string name="logout_confirm">வெளியேறு</string>
+    <string name="logout_cancel">ரத்து செய்</string>
+    <string name="logout_toast">வெற்றிகரமாக வெளியேற்றப்பட்டது</string>
 </resources>

@@ -57,4 +57,28 @@
     <string name="sample_data_loaded">Sample transactions added successfully!</string>
     <string name="permission_sms_rationale">DFund needs SMS permission to automatically track your bank UPI expenses and upcoming EMIs without manual typing.</string>
     <string name="permission_audio_rationale">DFund needs Microphone access to let you command the app using your voice in your native language.</string>
+
+    <!-- Profile & Logout -->
+    <string name="nav_profile">Profile</string>
+    <string name="profile_title">My Profile &amp; Settings</string>
+    <string name="profile_security_badge">Bank-Grade AES-256 Encrypted</string>
+    <string name="profile_account_id">Device ID: %1$s</string>
+    <string name="profile_risk_title">Investment Risk Appetite</string>
+    <string name="profile_risk_conservative">Conservative</string>
+    <string name="profile_risk_moderate">Balanced</string>
+    <string name="profile_risk_aggressive">Aggressive Growth</string>
+    <string name="profile_safety_cushion">Emergency Safety Cushion</string>
+    <string name="profile_pref_title">Preferences &amp; Security</string>
+    <string name="profile_pref_theme">Dark Theme</string>
+    <string name="profile_pref_lang">App Language</string>
+    <string name="profile_pref_biometric">Biometric App Lock</string>
+    <string name="profile_pref_sms">Automated SMS Tracking</string>
+    <string name="profile_status_active">Active • Real-time</string>
+    <string name="btn_edit_name">Change Name</string>
+    <string name="btn_logout">Log Out</string>
+    <string name="logout_dialog_title">Log Out of DFund</string>
+    <string name="logout_dialog_msg">Are you sure you want to log out? Your active session will be cleared.</string>
+    <string name="logout_confirm">Log Out</string>
+    <string name="logout_cancel">Cancel</string>
+    <string name="logout_toast">Logged out successfully</string>
 </resources>

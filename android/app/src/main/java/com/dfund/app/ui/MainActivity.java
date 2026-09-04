@@ -53,12 +53,19 @@ public class MainActivity extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottom_navigation);
         btnLanguage = findViewById(R.id.btn_language_selector);
         btnThemeToggle = findViewById(R.id.btn_theme_toggle);
+        MaterialButton btnTopProfile = findViewById(R.id.btn_top_profile);
 
         updateLanguageButtonLabel();
         btnLanguage.setOnClickListener(v -> showLanguagePickerDialog());
 
         updateThemeButton();
         btnThemeToggle.setOnClickListener(v -> toggleTheme());
+
+        if (btnTopProfile != null) {
+            btnTopProfile.setOnClickListener(v -> {
+                bottomNav.setSelectedItemId(R.id.nav_profile);
+            });
+        }
 
         // Setup Floating Action Button for Voice
         findViewById(R.id.fab_voice_action).setOnClickListener(v -> {
@@ -78,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             } else if (id == R.id.nav_transactions) {
                 switchFragment(TransactionsFragment.newInstance(null), "TRANSACTIONS");
+                return true;
+            } else if (id == R.id.nav_profile) {
+                switchFragment(ProfileFragment.newInstance(), "PROFILE");
                 return true;
             }
             return false;
@@ -116,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void showLanguagePickerDialog() {
+    public void showLanguagePickerDialog() {
         String[] languages = {"English", "தமிழ் (Tamil)", "తెలుగు (Telugu)", "മലയാളം (Malayalam)"};
         String[] codes = {"en", "ta", "te", "ml"};
 

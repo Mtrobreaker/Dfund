@@ -80,6 +80,54 @@ public class SecurityManager {
         securePrefs.edit().putString(KEY_SERVER_URL, url).apply();
     }
 
+    private static final String KEY_USER_NAME = "key_user_name";
+    private static final String KEY_RISK_LEVEL = "key_risk_level";
+    private static final String KEY_MONTHLY_BUFFER = "key_monthly_buffer";
+
+    public String getUserName() {
+        return securePrefs.getString(KEY_USER_NAME, "Karthik Raja");
+    }
+
+    public void setUserName(String name) {
+        securePrefs.edit().putString(KEY_USER_NAME, name != null ? name.trim() : "Valued User").apply();
+    }
+
+    public String getRiskLevel() {
+        return securePrefs.getString(KEY_RISK_LEVEL, "moderate");
+    }
+
+    public void setRiskLevel(String riskLevel) {
+        securePrefs.edit().putString(KEY_RISK_LEVEL, riskLevel).apply();
+    }
+
+    public float getMonthlySafetyBuffer() {
+        return securePrefs.getFloat(KEY_MONTHLY_BUFFER, 3000.0f);
+    }
+
+    public void setMonthlySafetyBuffer(float buffer) {
+        securePrefs.edit().putFloat(KEY_MONTHLY_BUFFER, buffer).apply();
+    }
+
+    public void logout() {
+        // Clear user session data securely while preserving theme and language
+        String currentLang = getLanguage();
+        String currentTheme = getThemeMode();
+        String serverUrl = getServerUrl();
+
+        securePrefs.edit()
+            .remove(KEY_USER_NAME)
+            .remove(KEY_RISK_LEVEL)
+            .remove(KEY_MONTHLY_BUFFER)
+            .remove(KEY_BIOMETRIC_ENABLED)
+            .putString(KEY_DEVICE_ID, "dfund_" + UUID.randomUUID().toString().substring(0, 12))
+            .apply();
+
+        setLanguage(currentLang);
+        setThemeMode(currentTheme);
+        setServerUrl(serverUrl);
+        Log.i(TAG, "User logged out successfully. Session reset.");
+    }
+
     public String getThemeMode() {
         return securePrefs.getString(KEY_THEME_MODE, "light");
     }
