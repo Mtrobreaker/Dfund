@@ -1,7 +1,7 @@
 # 🚀 DFund — Next-Gen AI Financial Advisor & Micro-SIP Automation
 
 > **Autonomous personal finance and micro-investment platform for gig economy workers, freelancers, and families.**  
-> Powered by **Sarvam AI Full Indian Regional AI Suite (Sarvam 105B LLM, Saaras v4 STT, Mayura v1 Translation, Bulbul v3 TTS)** and **Native Android Material 3**.
+> Powered by a **hybrid online + offline AI architecture**: cloud AI services with API-key access when connected, plus **on-device fine-tuned AI and offline voice models** so core functionality continues to work without internet. Built with **Native Android Material 3**.
 
 [![Platform](https://img.shields.io/badge/Platform-Android%20Native%20(Java)-green.svg)](https://developer.android.com/)
 [![Backend](https://img.shields.io/badge/Backend-FastAPI%20%7C%20Python%203.11+-blue.svg)](https://fastapi.tiangolo.com/)
@@ -13,6 +13,28 @@
 ---
 
 ## 🌟 Core Highlights
+
+### 🧠 Hybrid Online + Offline AI Architecture
+DFund is designed to work in **two operating modes** so the user is not completely dependent on an internet connection.
+
+- **Online Mode — Cloud AI:** When internet access is available, the app can use cloud AI services through securely configured API credentials. The online pipeline supports speech processing, translation, advanced financial reasoning, tool/action generation and cloud voice responses.
+- **Offline Mode — On-Device AI:** When the phone is offline, the app switches to **locally hosted/fine-tuned models** designed for DFund's specific financial-assistant use case. Core intent understanding and supported assistant interactions can continue without calling the cloud.
+- **Offline Voice:** The Android app also includes an **on-device voice model/pipeline** for supported offline speech interaction, allowing users to continue using voice features without an internet connection.
+- **Automatic Fallback:** The application selects the available AI path based on connectivity and configuration, prioritizing a seamless user experience instead of simply failing when cloud services are unavailable.
+
+### 🔄 Online vs Offline
+
+| Capability | Online Mode | Offline Mode |
+|---|---|---|
+| AI reasoning | Cloud model via API | On-device fine-tuned model |
+| Voice processing | Cloud voice services | On-device voice model |
+| Internet required | ✅ Yes | ❌ No |
+| Personal transaction data | Local app data + supported cloud requests | ✅ Processed locally where supported |
+| Cloud API keys | Used when enabled | Not required for local inference |
+| Main goal | Maximum AI capability | Availability, privacy and resilience |
+
+> **Core idea:** the app is not just a cloud wrapper. It is built as a **hybrid AI application with a local fallback**, so users can continue using supported features even when connectivity is unavailable.
+
 
 ### 🎙️ 1. All-in-One Sarvam AI Indian Regional Intelligence Pipeline
 DFund runs entirely on Sarvam AI's flagship models, purpose-built for Indian linguistic and financial contexts:
